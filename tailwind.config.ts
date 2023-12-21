@@ -1,5 +1,12 @@
 import type { Config } from 'tailwindcss'
 
+const generateColor = (name: string, colors: number[]) => {
+	return colors.reduce(
+		(obj, num) => ({ ...obj, [num]: `var(--${name}-${num})` }),
+		{}
+	);
+};
+
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -7,14 +14,23 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-    },
-  },
-  plugins: [],
+		extend: {
+			colors: {
+				primary: generateColor(
+					"primary",
+					[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
+				),
+				secondary: generateColor(
+					"secondary",
+					[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
+				),
+				error: generateColor(
+					"error",
+					[50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950]
+				),
+			},
+		},
+	},
+  plugins: [require("flowbite/plugin")],
 }
 export default config
