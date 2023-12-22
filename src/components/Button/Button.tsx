@@ -5,6 +5,7 @@ import {
 	ButtonSizes,
 	CustomFlowbiteTheme,
 	Button as _Button,
+	Spinner,
 } from "flowbite-react";
 import React from "react";
 
@@ -14,15 +15,20 @@ export default function Button({
 	btnType = "primary",
 	children = "Untitle",
 	className,
+	ref,
+	isLoading = false,
+	...props
 }: PropTypes) {
 	return (
 		<_Button
 			theme={getTheme(fill)}
 			color={btnType}
-			className={className}
+			className={`${className} transition-all duration-300`}
 			size={size}
+			disabled={isLoading}
+			{...props}
 		>
-			{children}
+			{isLoading ? <Spinner size={size} /> : children}
 		</_Button>
 	);
 }
@@ -50,8 +56,10 @@ const getTheme = (isFill: boolean): CustomFlowbiteTheme["button"] => {
 };
 
 type PropTypes = ReactNodeChildren &
+	React.ComponentProps<typeof _Button> &
 	React.ComponentPropsWithRef<"button"> & {
 		fill?: boolean;
 		size?: keyof ButtonSizes;
 		btnType?: "primary" | "secondary" | "error";
+		isLoading?: boolean;
 	};
