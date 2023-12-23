@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start","axios": "^1.6.2",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -13,7 +13,7 @@
   "dependencies": {
     "axios": "^1.6.2",
     "cookies-next": "^4.1.0",
-    "flowbite": "^2.1.1",
+    "flowbite": "^2.2.1",
     "flowbite-react": "^0.6.4",
     "framer-motion": "^10.16.12",
     "next": "14.0.2",
