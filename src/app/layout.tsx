@@ -5,8 +5,8 @@ import CustomThemeProvider from "../components/CustomThemeProvider";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ESMS Web App',
-  description: 'Electronic Store Management System',
+  title: 'Store Web App',
+  description: '',
 }
 
 export default function RootLayout({
