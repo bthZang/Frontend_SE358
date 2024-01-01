@@ -4,10 +4,10 @@ import { Metadata } from "next";
 export default function Page() {
 	return (
 		<>
-			<Button type="error" fill={false}>
+			<Button fill={false}>
 				Sign in
 			</Button>
-			<Button type="secondary" fill={false}>
+			<Button fill={false}>
 				Sign in
 			</Button>
 		</>
