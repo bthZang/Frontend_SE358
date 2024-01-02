@@ -1,4 +1,4 @@
-import { API } from "@/constant/apiEndpoint";
+import API from "@/constants/apiEndpoint";
 import axios from "axios";
 
 import { ILoginResponse } from "./type";
@@ -14,11 +14,16 @@ export const refreshAccessTokenFn = async () => {
     const tokenStr = localStorage.getItem("token") || "";
     if (tokenStr) {
         const token = JSON.parse(tokenStr) as IToken;
-        const response = await apiInstance.get<ILoginResponse>("auth/refresh", {
-            headers: {
-                Authorization: `Bearer ${token.refreshToken}`,
+        const response = await apiInstance.post<ILoginResponse>(
+            `auth/refresh-token`,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${token.refreshToken}`,
+                },
+                baseURL: API.baseUrl,
             },
-        });
+        );
         const tokenRes = response.data;
         localStorage.setItem(
             "token",
@@ -30,14 +35,16 @@ export const refreshAccessTokenFn = async () => {
     }
 };
 
-apiInstance.interceptors.request.use((request) => {
-    const tokenStr = localStorage.getItem("token") || "";
-    if (tokenStr) {
-        const token = JSON.parse(tokenStr) as IToken;
-        request.headers.setAuthorization(`Bearer ${token.accessToken}`);
-    }
-    return request;
-});
+const authenticationInterceptor = apiInstance.interceptors.request.use(
+    (request) => {
+        const tokenStr = localStorage.getItem("token") || "";
+        if (tokenStr && !request.headers.getAuthorization()) {
+            const token = JSON.parse(tokenStr) as IToken;
+            request.headers.setAuthorization(`Bearer ${token.accessToken}`);
+        }
+        return request;
+    },
+);
 
 apiInstance.interceptors.response.use(
     (response) => {

@@ -1,3 +1,4 @@
+import SideBar from "@/components/sidebar/Sidebar";
 import API from "@/constants/apiEndpoint";
 import COOKIE_NAME from "@/constants/cookies";
 import SEARCH_PARAMS from "@/constants/searchParams";
@@ -29,12 +30,12 @@ export default async function Layout({ children }: ReactNodeChildren) {
     const staffInfo: Staff = await staffInfoResponse.json();
 
     return (
-            <div className=" w-screen h-screen flex">
-                <div className=" w-max z-50">
-                </div>
-                <div className=" py-8 pl-10 pr-8 w-full h-screen bg-background-normal overflow-hidden">
-                    {children}
-                </div>
+        <div className=" w-screen h-screen grid grid-cols-12">
+            <div className=" col-span-2 "></div>
+            <div className=" col-span-2 ">
+                <SideBar />
             </div>
+            <div className=" col-span-10 ">{children}</div>
+        </div>
     );
 }
