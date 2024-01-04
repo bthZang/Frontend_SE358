@@ -1,20 +1,20 @@
-import Button from "@/components/Button/Button";
-import { Metadata } from "next";
+import withQuery from "@/utils/withQuery";
+import SignIn from "./SignIn";
 
-export default function Page() {
-	return (
-		<>
-			<Button fill={false}>
-				Sign in
-			</Button>
-			<Button fill={false}>
-				Sign in
-			</Button>
-		</>
-	);
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import API from "@/constants/apiEndpoint";
+
+export default async function Page() {
+    const myHeaders = new Headers();
+    const accessToken = cookies().get("accessToken")?.value || "";
+    myHeaders.append("Authorization", `Bearer ${accessToken}`);
+
+    const staffInfoResponse = await fetch(API.staff.getStaffProfile, {
+        headers: myHeaders,
+    });
+
+    if (staffInfoResponse.status === 200) redirect(withQuery("/home", {}));
+
+    return <SignIn />;
 }
-
-export const metadata: Metadata = {
-	title: "Sign in to ESMS",
-	description: "Electronic Store Management System",
-};
