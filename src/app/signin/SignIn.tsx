@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { HiArrowRight, HiMail } from "react-icons/hi";
 
 import { Yesteryear } from "next/font/google";
-import ControllerTextInput from "@/components/ControllerInput/ControllerTextInput";
+import ControllerTextInput from "@/components/controllerInput/ControllerTextInput";
 
 const yesteryear = Yesteryear({
     weight: "400",
