@@ -3,8 +3,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import Category from "../../types/entity/Category";
 import FONT from "../../utils/fontFamily";
 import Button from "../Button/Button";
-import ControllerSelectInput from "../ControllerInput/ControllerSelectInput";
-import ControllerTextInput from "../ControllerInput/ControllerTextInput";
+import ControllerSelectInput from "../controllerInput/ControllerSelectInput";
+import ControllerTextInput from "../controllerInput/ControllerTextInput";
 import DropZone from "../DropZone/DropZone";
 import { useUpdateProductModal } from "./UpdateProductFormModal";
 import Product from "@/types/entity/Product";
@@ -28,6 +28,7 @@ export default function UpdateProductFormUI({
         clearErrors,
     } = useForm<UpdatedProduct>({ defaultValues: product });
 
+    const { closeUpdateProductModal } = useUpdateProductModal();
 
     return (
         <div
@@ -135,6 +136,7 @@ export default function UpdateProductFormUI({
                 <div className=" flex justify-between mt-12">
                     <Button
                         btnType="secondary"
+                        onClick={() => closeUpdateProductModal()}
                     >
                         Back
                     </Button>
