@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
 import OperationStateToast from "../OperationStateToast/OperationStateToast";
 import { useUpdateProductModal } from "./UpdateProductFormModal";
+import UpdateProductFormUI from "./UpdateProductFormUI";
 import useLoading from "@/hooks/useLoading";
 
 export default function UpdateProductForm({ productId }: PropTypes) {
@@ -18,7 +19,7 @@ export default function UpdateProductForm({ productId }: PropTypes) {
 
     const { openLoading, closeLoading } = useLoading();
 
-    const { refetchProductList } = useUpdateProductModal();
+   
 
     const { data: product, isLoading: isProductLoading } = useQuery<Product>(
         ["product", productId],
@@ -29,7 +30,7 @@ export default function UpdateProductForm({ productId }: PropTypes) {
         },
     );
 
-    const { closeUpdateProductModal } = useUpdateProductModal();
+    
 
     const { mutate } = useMutation(updateProductAPI, {
         onMutate: () => {
@@ -39,7 +40,6 @@ export default function UpdateProductForm({ productId }: PropTypes) {
             closeLoading();
         },
         onSuccess: (_, data) => {
-            refetchProductList?.();
             toast.custom(
                 (t) => (
                     <OperationStateToast
@@ -50,7 +50,6 @@ export default function UpdateProductForm({ productId }: PropTypes) {
                 ),
                 { duration: 3000 },
             );
-            closeUpdateProductModal();
         },
         onError: (error: any, data) => {
             toast.custom(
@@ -70,7 +69,7 @@ export default function UpdateProductForm({ productId }: PropTypes) {
 
     return (
         <>
-               
+            
         </>
     );
 }
