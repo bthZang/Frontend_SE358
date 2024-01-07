@@ -18,3 +18,5 @@ export type NewProduct = {
     warrantyPeriod: number;
     photo?: File | null;
 };
+
+
