@@ -8,6 +8,9 @@ const API = {
     staff: {
         getStaffProfile: `${BASE_API}/staff/profile`,
     },
+    importBill: {
+        getDetail: (id: string) => `${BASE_API}/import/${id}`,
+    },
 };
 
 export default API;
