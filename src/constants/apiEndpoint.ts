@@ -11,6 +11,9 @@ const API = {
     importBill: {
         getDetail: (id: string) => `${BASE_API}/import/${id}`,
     },
+    supplier: {
+        getDetail: (id: string) => `${BASE_API}/supplier/${id}`,
+    }
 };
 
 export default API;
