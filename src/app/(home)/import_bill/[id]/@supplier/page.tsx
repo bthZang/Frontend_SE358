@@ -1,5 +1,5 @@
 import Avatar from "@/components/Avatar/Avatar";
-import API from "@/constants/apiEndpoint";
+import API from "@/constants/apiEnpoint";
 import Revision from "@/types/Revision";
 import ImportBill, { ImportProductResponse } from "@/types/entity/ImportBill";
 import Supplier from "@/types/entity/Supplier";
@@ -33,16 +33,16 @@ export default async function Page({ params: { id } }: PropTypes) {
                     .join("")}
             >
                 <div>
-                    <p className=" font-semibold text-start text-secondary-700 text-sm">
+                    <p className=" font-semibold text-start text-secondary-950 text-sm">
                         {supplier.name}
                     </p>
-                    <p className=" font-normal text-start text-secondary-650 text-sm">
+                    <p className=" font-normal text-start text-secondary-600 text-sm">
                         {supplier.email}
                     </p>
-                    <p className=" font-normal text-start text-secondary-650 text-sm">
+                    <p className=" font-normal text-start text-secondary-600 text-sm">
                         {supplier.phone}
                     </p>
-                    <p className=" font-normal text-start text-secondary-650 text-sm">
+                    <p className=" font-normal text-start text-secondary-600 text-sm">
                         {supplier.address}
                     </p>
                 </div>
