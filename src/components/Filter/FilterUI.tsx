@@ -1,25 +1,28 @@
-import FONT from "../../utils/fontFamily";
 import { CustomFlowbiteTheme, Dropdown, Spinner } from "flowbite-react";
-import { useState } from "react";
-import { HiOutlineCheck, HiOutlineSearch } from "react-icons/hi";
+import { HiOutlineCheck } from "react-icons/hi";
+import FONT from "../../utils/fontFamily";
 
-export default function FilterUI({
+export default function Filter({
     title,
     items = [],
-    onClick = () => { },
+    onClick = () => {},
+    onItemChange = (item: string) => {},
     isLoading = false,
+    choosen = "",
+    className,
+    ...props
 }: PropTypes) {
-    const [choosen, setChoosen] = useState();
-
     return (
-        <div className=" flex items-center gap-2">
-            <p className={`${FONT.primary} font-bold text-[14px]`}>
+        <div className={` flex items-center gap-2 ${className}`} {...props}>
+            <p
+                className={`${FONT.primary.className} font-bold text-[14px] text-secondary-900`}
+            >
                 {title}
             </p>
             <Dropdown
                 theme={dropdownTheme}
                 label={
-                    <p className=" whitespace-nowrap	overflow-hidden text-ellipsis max-w-[90px]">
+                    <p className=" whitespace-nowrap overflow-hidden text-ellipsis max-w-[250px]">
                         {choosen || "All"}
                     </p>
                 }
@@ -28,7 +31,7 @@ export default function FilterUI({
                 size="sm"
             >
                 {isLoading ? (
-                    <div className=" my-2 flex gap-2 justify-center items-center">
+                    <div className=" my-2 flex gap-2 justify-center items-center px-4 py-1">
                         <Spinner size="sm" />
                         <p className=" text-sm text-secondary-900">
                             Loading...
@@ -39,7 +42,7 @@ export default function FilterUI({
                         {items.map((value) => (
                             <Dropdown.Item
                                 theme={dropdownTheme?.floating?.item}
-                                onClick={() => setChoosen(value)}
+                                onClick={() => onItemChange(value)}
                                 key={value}
                                 icon={value === choosen ? HiOutlineCheck : null}
                             >
@@ -48,7 +51,7 @@ export default function FilterUI({
                         ))}
                         <Dropdown.Item
                             theme={dropdownTheme?.floating?.item}
-                            onClick={() => setChoosen(undefined)}
+                            onClick={() => onItemChange(undefined || "")}
                             icon={choosen ? null : HiOutlineCheck}
                         >
                             <p className="  w-full text-start font-medium text-primary-300">
@@ -89,14 +92,16 @@ const dropdownTheme: CustomFlowbiteTheme["dropdown"] = {
             light: "border border-secondary-200 bg-white text-secondary-900",
             auto: "border border-secondary-200 bg-white text-secondary-900",
         },
-        target: " max-w-[120px] border-2 border-surface-grey02 text-ellipsis flex bg-surface-grey01 text-secondary-950 transition duration-200 enabled:hover:bg-primary-200 enabled:active:bg-primary-300",
+        target: " max-w-[250px] w-max border-2 border-surface-grey02 text-ellipsis flex bg-surface-grey01 text-secondary-950 transition duration-200 enabled:hover:bg-primary-200 enabled:active:bg-primary-300",
     },
     inlineWrapper: "flex w-full items-center justify-between",
 };
 
 type PropTypes = {
     title: string;
-    items: any[];
+    items?: string[];
+    choosen?: string;
     onClick?: () => any;
+    onItemChange?: (item: string) => any;
     isLoading?: boolean;
-} & React.ComponentPropsWithRef<"div">;
+} & Omit<React.ComponentPropsWithoutRef<"div">, "onClick">;
