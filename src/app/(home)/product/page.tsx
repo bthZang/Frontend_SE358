@@ -2,18 +2,21 @@
 
 import { HiPlus } from "react-icons/hi";
 
+import { useDeleteProductMutation } from "@/api/product/deleteProduct.api";
 import viewProductList from "@/api/product/viewProductList.api";
 import Button from "@/components/Button/Button";
 import CategoryFilter from "@/components/CategoryFilter/CategoryFilter";
 import { useClaimModal } from "@/components/ClaimModal/ClaimModal";
 import { useCreateProductModal } from "@/components/CreateProductForm/CreateProductFormModal";
 import DataTable from "@/components/DataTable/DataTable";
+import FilterBadge from "@/components/FilterBadge/FilterBadge";
+import PriceRangeFilter from "@/components/PriceRangeFilter/PriceRangeFilter";
 import ProductSearch from "@/components/ProductSearch/ProductSearch";
 import { useUpdateProductModal } from "@/components/UpdateProductForm/UpdateProductFormModal";
 import SEARCH_PARAMS from "@/constants/searchParams";
 import ProductPreview from "@/types/entity/ProductPreview";
 import FORMATTER from "@/utils/formatter";
-import {useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useQuery } from "react-query";
 
 export default function Page() {
@@ -35,6 +38,7 @@ export default function Page() {
         },
     );
 
+    const deleteProductMutation = useDeleteProductMutation(refetch);
 
     return (
         <div className="w-full h-full flex flex-col">
@@ -42,6 +46,7 @@ export default function Page() {
                 <ProductSearch className="" />
                 <div className=" flex justify-end gap-8">
                     <CategoryFilter className="" />
+                    <PriceRangeFilter />
                     <Button
                         size="sm"
                         onClick={() => openCreateProductModal(refetch)}
@@ -52,12 +57,35 @@ export default function Page() {
                 </div>
             </div>
             <div className=" flex gap-5 mt-5">
+                <FilterBadge
+                    title="Product name"
+                    type="search"
+                    searchParamName={SEARCH_PARAMS.productName}
+                />
+                <FilterBadge
+                    title="Category"
+                    searchParamName={SEARCH_PARAMS.categoryName}
+                    type="filter"
+                />
+                <FilterBadge
+                    title="Price"
+                    searchParamName={SEARCH_PARAMS.price}
+                    type="filter"
+                />
             </div>
             <DataTable
                 data={data || []}
                 isLoading={isLoading}
                 className="-mr-8 pr-8 mt-4"
                 onDelete={(product) => {
+                    openClaimModal(
+                        <>
+                            Do you want to delete product{" "}
+                            <span>{product.name}</span>
+                        </>,
+                        (confirm) =>
+                            confirm && deleteProductMutation.mutate(product),
+                    );
                 }}
                 onEdit={(product) => {
                     openUpdateProductModal(product.id, refetch);
