@@ -16,3 +16,4 @@ export default async function viewSupplierList({
     console.log(suppliers);
 
     return suppliers;
+}
