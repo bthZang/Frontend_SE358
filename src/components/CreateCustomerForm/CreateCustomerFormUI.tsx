@@ -1,15 +1,27 @@
+import { NewCustomer } from "@/api/customer/addNewCustomer.api";
 import { Label } from "flowbite-react";
-import React from "react"
+import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import FONT from "../../utils/fontFamily";
 import Button from "../Button/Button";
 import ControllerTextInput from "../ControllerInput/ControllerTextInput";
 import ControllerTextarea from "../ControllerTextarea/ControllerTextarea";
+import { useCreateCustomerModal } from "./CreateCustomerFormModal";
 
-export default function CreateCustomerFormUI({  
+export default function CreateCustomerFormUI({
+    onSubmitData,
     className,
     ...props
 }: PropTypes) {
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: { errors },
+        clearErrors,
+    } = useForm<NewCustomer>();
 
+    const { close } = useCreateCustomerModal();
 
     return (
         <div
@@ -21,31 +33,31 @@ export default function CreateCustomerFormUI({
             >
                 Add Customer
             </h1>
-            <form>
+            <form onSubmit={handleSubmit(onSubmitData)}>
                 <div className=" grid grid-cols-1 gap-5 mt-5">
                     <ControllerTextInput
-                        control=""
+                        control={control}
                         name="name"
                         title="Name"
                         rules={{ required: "Name is required" }}
-                        register=""
+                        register={register}
                         placeholder="Enter Customer name..."
                         onValueChange={(d: any) => {
-                           
+                            clearErrors("name");
                         }}
-                        error=""
+                        error={errors.name}
                     />
                     <ControllerTextInput
-                        control=""
+                        control={control}
                         name="phone"
                         title="Phone"
                         rules={{ required: "Phone is required" }}
-                        register=""
+                        register={register}
                         placeholder="Enter Customer phone..."
                         onValueChange={(d: any) => {
-                            
+                            clearErrors("phone");
                         }}
-                        error=""
+                        error={errors.phone}
                     />
                     <div>
                         <div className="mb-2 block">
@@ -55,15 +67,15 @@ export default function CreateCustomerFormUI({
                             id="address"
                             rows={4}
                             placeholder="Leave your address here..."
-                            control=""
+                            control={control}
                             name="address"
                             title="Address"
                             rules={{ required: "Address is required" }}
-                            register=""
+                            register={register}
                             onValueChange={(d: any) => {
-                               
+                                clearErrors("address");
                             }}
-                            error=""
+                            error={errors.address}
                         />
                     </div>
                 </div>
@@ -79,5 +91,5 @@ export default function CreateCustomerFormUI({
 }
 
 type PropTypes = React.ComponentPropsWithoutRef<"div"> & {
-    
+    onSubmitData: SubmitHandler<NewCustomer>;
 };

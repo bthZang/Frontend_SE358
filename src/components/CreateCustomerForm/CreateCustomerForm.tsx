@@ -1,5 +1,6 @@
 "use client";
 
+import addNewSupplier from "@/api/supplier/addNewSupplier.api";
 import useLoading from "@/hooks/useLoading";
 import { useMutation } from "react-query";
 import {
@@ -7,6 +8,7 @@ import {
     createSuccessToast,
 } from "../OperationStateToast/OperationStateToast";
 import { useCreateCustomerModal } from "./CreateCustomerFormModal";
+import CreateCustomerFormUI from "./CreateCustomerFormUI";
 import addNewCustomer from "@/api/customer/addNewCustomer.api";
 
 export default function CreateCustomerForm() {
@@ -35,5 +37,5 @@ export default function CreateCustomerForm() {
         },
     });
 
-    return <div></div>;
+    return <CreateCustomerFormUI onSubmitData={(data) => mutate(data)} />;
 }
