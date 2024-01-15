@@ -58,7 +58,10 @@ export default function CreateCategoryForm() {
     });
 
     return (
-      <div>
-      </div>
+        <CreateCategoryFormUI
+        categories={categories}
+        isCategoryLoading={isCategoriesLoading}
+        onSubmitData={(data) => mutate(data)}
+        />
     );
 }
