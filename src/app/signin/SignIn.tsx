@@ -1,14 +1,21 @@
 "use client";
+import { setCookie } from "cookies-next";
+import Image from "next/image";
+import LOGO from "@/assets/logo.png"
 
 import Button from "@/components/Button/Button";
-import TokenContext from "@/contexts/TokenContext";
+import CheckBox from "@/components/CheckBox/CheckBox";
+import Link from "@/components/Typography/Link";
+import API from "@/constants/apiEndpoint";
+import { publicFetcher } from "@/hooks/usePublicRoute";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiArrowRight, HiMail } from "react-icons/hi";
 
-import { Yesteryear } from "next/font/google";
 import ControllerTextInput from "@/components/ControllerInput/ControllerTextInput";
+import SEARCH_PARAMS from "@/constants/searchParams";
+import { Yesteryear } from "next/font/google";
 
 const yesteryear = Yesteryear({
     weight: "400",
@@ -19,8 +26,6 @@ const yesteryear = Yesteryear({
 export default function SignIn() {
     const router = useRouter();
     const searchParams = useSearchParams();
-
-    const { setToken } = useContext(TokenContext);
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -37,6 +42,26 @@ export default function SignIn() {
     const onSubmit = async (data: FormValues) => {
         const email = data.username;
         const password = data.password;
+
+        setIsLoading(true);
+        const res = await publicFetcher(API.authentication.signIn, "POST", {
+            email,
+            password,
+        });
+
+        if (res.status === 200) {
+            const token = await res.json();
+            setCookie("accessToken", token.access_token);
+            setCookie("refreshToken", token.refresh_token);
+            router.push(
+                decodeURI(searchParams.get(SEARCH_PARAMS.redirectUri) || "/"),
+            );
+        } else {
+            setValue("username", "");
+            setValue("password", "");
+            setError("root", { message: "Email or password is invalid" });
+        }
+        setIsLoading(false);
     };
 
     return (
@@ -50,6 +75,13 @@ export default function SignIn() {
             <div className=" w-max min-w-[550px] rounded-3xl bg-white grid place-items-center">
                 <div className=" w-full px-20 py-16">
                     <div className="relative w-fit mx-auto">
+                        <Image
+                            className="absolute top-0 -left-10"
+                            src={LOGO}
+                            width={30}
+                            height={30}
+                            alt="logo"
+                        />
                         <h1 className=" mb-14 text-3xl text-center font-semibold text-secondary-900">
                             Electronic Store
                         </h1>
@@ -107,6 +139,10 @@ export default function SignIn() {
                                 {errors.root.message}
                             </p>
                         )}
+                        <div className=" w-full flex justify-between items-center mt-5">
+                            <CheckBox id="remember me">Remember me</CheckBox>
+                            <Link>Forgot password</Link>
+                        </div>
                         <Button
                             type="submit"
                             className=" mt-8 w-full"
