@@ -2,6 +2,8 @@
 
 import ClaimModal from "@/components/ClaimModal/ClaimModal";
 import CreateProductFormModal from "@/components/CreateProductForm/CreateProductFormModal";
+import CreateCategoryFormModal from "@/components/CreateCategoryForm/CreateCategoryFormModal";
+import CreateCustomerFormModal from "@/components/CreateCustomerForm/CreateCustomerFormModal";
 import { ReactNodeChildren } from "@/types/ReactNodeChildren";
 import { ReactNode, createContext, useState } from "react";
 
@@ -21,6 +23,8 @@ export function ModalProvider({ children }: ReactNodeChildren) {
         >
             {children}
             <CreateProductFormModal />
+            <CreateCategoryFormModal />
+            <CreateCustomerFormModal />
             <ClaimModal />
         </ModalStateContext.Provider>
     );
@@ -33,6 +37,7 @@ export const defaultModalStateValue = {
     updateProduct: { isOpen: false },
     addCategory: { isOpen: false },
     updateCategory: { isOpen: false },
+    addCustomer: { isOpen: false },
     claim: { isOpen: false },
 };
 
@@ -55,6 +60,7 @@ export type IModalState = {
     updateProduct: IModalStateItem & { productId?: string };
     addCategory: IModalStateItem;
     updateCategory: IModalStateItem & { categoryId?: string };
+    addCustomer: IModalStateItem;
     claim: IModalStateItem & {
         message?: ReactNode;
         onResponse?: (confirm: boolean) => any;
