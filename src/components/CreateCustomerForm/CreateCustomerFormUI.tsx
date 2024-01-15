@@ -1,5 +1,5 @@
 import { Label } from "flowbite-react";
-import React from "react";
+import React from "react"
 import FONT from "../../utils/fontFamily";
 import Button from "../Button/Button";
 import ControllerTextInput from "../ControllerInput/ControllerTextInput";
