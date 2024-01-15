@@ -1,6 +1,5 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import Category from "../../types/entity/Category";
 import FONT from "../../utils/fontFamily";
 import Button from "../Button/Button";
 import ControllerTextInput from "../ControllerInput/ControllerTextInput";
@@ -8,8 +7,6 @@ import { useCreateCategoryModal } from "./CreateCategoryFormModal";
 import { NewCategory } from "@/api/category/addNewCategory.api";
 
 export default function CreateCategoryFormUI({
-    categories = [],
-    isCategoryLoading = false,
     onSubmitData,
     className,
     ...props
@@ -19,8 +16,6 @@ export default function CreateCategoryFormUI({
         handleSubmit,
         control,
         formState: { errors },
-        getValues,
-        setValue,
         clearErrors,
     } = useForm<NewCategory>();
 
@@ -28,30 +23,29 @@ export default function CreateCategoryFormUI({
 
     return (
         <div
-            className={` w-full bg-background-normal rounded-2xl p-8 ${className}`}
+            className={`w-full bg-background-normal rounded-2xl p-8 ${className}`}
             {...props}
         >
             <h1
                 className={` text-secondary-950 text-2xl text-center font-semibold ${FONT.primary.className}`}
             >
-                Add Category
+                Add category
             </h1>
             <form onSubmit={handleSubmit(onSubmitData)}>
-                <div className=" grid grid-cols-2 gap-5">
-                    <ControllerTextInput
-                        control={control}
-                        name="name"
-                        title="Name"
-                        rules={{ required: "Name is required" }}
-                        register={register}
-                        placeholder="BOYALINK"
-                        onValueChange={(d: any) => {
-                            clearErrors("name");
-                        }}
-                        error={errors.name}
-                    />
-                </div>
-                <div className=" flex justify-between mt-12">
+                <ControllerTextInput
+                    control={control}
+                    name="name"
+                    title="Name"
+                    rules={{ required: "Name is required" }}
+                    register={register}
+                    placeholder="BOYALINK"
+                    onValueChange={(d: any) => {
+                        clearErrors("name");
+                    }}
+                    error={errors.name}
+                />
+
+                <div className="flex justify-between mt-8">
                     <Button
                         btnType="secondary"
                         onClick={() => closeCreateCategoryModal()}
@@ -66,7 +60,5 @@ export default function CreateCategoryFormUI({
 }
 
 type PropTypes = React.ComponentPropsWithoutRef<"div"> & {
-    categories?: Category[];
-    isCategoryLoading?: boolean;
     onSubmitData: SubmitHandler<NewCategory>;
 };
