@@ -16,10 +16,10 @@ import withQuery from "../../utils/withQuery";
 import Button from "../Button/Button";
 
 export default function ProductSearchUI({
-    onCategoryChange = () => {},
-    onProductSearchChange = () => {},
-    onCategoryDropdownClicked = () => {},
-    onSearch = () => {},
+    onCategoryChange = () => { },
+    onProductSearchChange = () => { },
+    onCategoryDropdownClicked = () => { },
+    onSearch = () => { },
     isCategoryLoading = false,
     isProductLoading = false,
     categories = [],

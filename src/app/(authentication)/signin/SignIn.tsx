@@ -1,7 +1,7 @@
 "use client";
 import { setCookie } from "cookies-next";
 import Image from "next/image";
-import LOGO from "@/assets/logo.png"
+import LOGO from "../../../assets/logo.png";
 
 import Button from "@/components/Button/Button";
 import CheckBox from "@/components/CheckBox/CheckBox";

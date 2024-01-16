@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import SideBar from "./Sidebar";
+import SideBar from "./SideBar";
 
 const meta = {
-    title: "Components/SideBar",
+    title: "Components/Item/SideBar",
     component: SideBar,
     parameters: {
         layout: "centered",
@@ -16,24 +16,78 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Dashboard: Story = {
-    args: {},
+    args: {
+        staffInfo: {
+            name: "",
+            phone: "",
+            email: "",
+            role: "ADMIN",
+            lastOnline: "",
+            citizenId: "",
+            accountNonExpired: false,
+            credentialsNonExpired: false,
+            accountNonLocked: false,
+            enabled: false,
+            id: "",
+        },
+    },
     parameters: {
         nextjs: {
             appDirectory: true,
             navigation: {
-                pathname: '/home',
+                pathname: "/home",
             },
         },
     },
 };
 
 export const Products: Story = {
-    args: {},
+    args: {
+        staffInfo: {
+            name: "",
+            phone: "",
+            email: "",
+            role: "ADMIN",
+            lastOnline: "",
+            citizenId: "",
+            accountNonExpired: false,
+            credentialsNonExpired: false,
+            accountNonLocked: false,
+            enabled: false,
+            id: "",
+        },
+    },
     parameters: {
         nextjs: {
             appDirectory: true,
             navigation: {
-                pathname: '/product',
+                pathname: "/product",
+            },
+        },
+    },
+};
+
+export const Imports: Story = {
+    args: {
+        staffInfo: {
+            name: "",
+            phone: "",
+            email: "",
+            role: "ADMIN",
+            lastOnline: "",
+            citizenId: "",
+            accountNonExpired: false,
+            credentialsNonExpired: false,
+            accountNonLocked: false,
+            enabled: false,
+            id: "",
+        },
+    },
+    parameters: {
+        nextjs: {
+            appDirectory: true,
+            navigation: {
+                pathname: "/import_bill",
             },
         },
     },
