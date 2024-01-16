@@ -1,3 +1,5 @@
+"use client";
+
 import BaseEntity from "@/types/entity/BaseEntity";
 import { CustomFlowbiteTheme, Dropdown, Table } from "flowbite-react";
 import { HiOutlineDotsVertical, HiPencil, HiTrash } from "react-icons/hi";
@@ -11,15 +13,21 @@ export default function DataTable<T extends Object & BaseEntity>({
     pick,
     className,
     isEdit = true,
-    onEdit = () => { },
-    onDelete = () => { },
+    onEdit,
+    onDelete,
     onClickRow = () => { },
     ...props
 }: PropTypes<T>) {
     return (
-        <div className={`overflow-x-auto ${className}`} {...props}>
+        <div
+            className={`overflow-auto flex-1 max-w-full h-fit max-h-full rounded-lg border-[1px] border-secondary-200 ${className}`}
+            {...props}
+        >
+            {/* <p className="text-yellow-500 text-sm font-semibold mb-4">
+                {data?.length} items
+            </p> */}
             {isLoading ? (
-                <TableSketon />
+                <TableSketon col={Object.keys(pick).length} />
             ) : (
                 <Table theme={tableTheme} hoverable>
                     <Table.Head theme={tableTheme?.head}>
@@ -50,7 +58,7 @@ export default function DataTable<T extends Object & BaseEntity>({
                         {data.map((row, index) => (
                             <Table.Row
                                 key={row.id}
-                                className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                                className="bg-white cursor-pointer hover:bg-background-hover duration-100"
                                 onClick={() => onClickRow(row)}
                             >
                                 <Table.Cell
@@ -99,7 +107,10 @@ export default function DataTable<T extends Object & BaseEntity>({
                                     </Table.Cell>
                                 ))}
                                 {isEdit && (
-                                    <Table.Cell theme={tableTheme?.body?.cell}>
+                                    <Table.Cell
+                                        theme={tableTheme?.body?.cell}
+                                        onClick={(e) => e.preventDefault()}
+                                    >
                                         <Dropdown
                                             label=""
                                             renderTrigger={() => (
@@ -113,7 +124,7 @@ export default function DataTable<T extends Object & BaseEntity>({
                                         >
                                             <Dropdown.Item
                                                 icon={HiPencil}
-                                                onClick={() => onEdit(row)}
+                                                onClick={() => onEdit?.(row)}
                                             >
                                                 Edit
                                             </Dropdown.Item>
@@ -122,7 +133,7 @@ export default function DataTable<T extends Object & BaseEntity>({
                                                     icon: " text-red-600 mr-2 h-4 w-4",
                                                 }}
                                                 icon={HiTrash}
-                                                onClick={() => onDelete(row)}
+                                                onClick={() => onDelete?.(row)}
                                             >
                                                 <p className=" text-red-600">
                                                     Delete
@@ -144,7 +155,7 @@ const tableTheme: CustomFlowbiteTheme["table"] = {
     root: {
         base: "w-full text-left rounded-lg text-sm text-secondary-500",
         shadow: "absolute bg-white dark:bg-black w-full h-full top-0 left-0 rounded-lg drop-shadow-md -z-10",
-        wrapper: "relative rounded-lg border-[1px] border-secondary-200",
+        wrapper: "relative ",
     },
     body: {
         base: "group/body",
