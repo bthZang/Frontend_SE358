@@ -1,7 +1,8 @@
-import SideBar from "@/components/sidebar/Sidebar";
+import SideBar from "@/components/SideBar/SideBar";
 import API from "@/constants/apiEndpoint";
 import COOKIE_NAME from "@/constants/cookies";
 import SEARCH_PARAMS from "@/constants/searchParams";
+import { ModalProvider } from "@/contexts/ModalContext";
 import { ReactNodeChildren } from "@/types/ReactNodeChildren";
 import Staff from "@/types/entity/Staff";
 import withQuery from "@/utils/withQuery";
@@ -30,12 +31,15 @@ export default async function Layout({ children }: ReactNodeChildren) {
     const staffInfo: Staff = await staffInfoResponse.json();
 
     return (
-        <div className=" w-screen h-screen grid grid-cols-12">
-            <div className=" col-span-2 "></div>
-            <div className=" col-span-2 ">
-                <SideBar />
+        <ModalProvider>
+            <div className=" w-screen h-screen flex">
+                <div className=" w-max z-50">
+                    <SideBar staffInfo={staffInfo} />
+                </div>
+                <div className=" py-8 pl-10 pr-8 w-full h-screen flex flex-col bg-background-normal overflow-hidden">
+                    {children}
+                </div>
             </div>
-            <div className=" col-span-10 ">{children}</div>
-        </div>
+        </ModalProvider>
     );
 }

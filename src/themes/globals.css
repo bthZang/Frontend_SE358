@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	background-color: var(--primary);
+@layer utilities {
+    button:focus {
+        @apply !outline-0;
+    }
+
+    * {
+        /* scrollbar-gutter: stable; */
+    }
 }

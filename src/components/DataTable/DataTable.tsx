@@ -11,9 +11,9 @@ export default function DataTable<T extends Object & BaseEntity>({
     pick,
     className,
     isEdit = true,
-    onEdit = () => {},
-    onDelete = () => {},
-    onClickRow = () => {},
+    onEdit = () => { },
+    onDelete = () => { },
+    onClickRow = () => { },
     ...props
 }: PropTypes<T>) {
     return (
@@ -64,12 +64,10 @@ export default function DataTable<T extends Object & BaseEntity>({
                                     <Table.Cell
                                         key={`${row.id}_${column}`}
                                         theme={{
-                                            base: `${
-                                                tableTheme?.body?.cell?.base
-                                            } ${
-                                                pick[column as keyof typeof row]
+                                            base: `${tableTheme?.body?.cell?.base
+                                                } ${pick[column as keyof typeof row]
                                                     .className || ""
-                                            }`,
+                                                }`,
                                         }}
                                     >
                                         {pick[column as keyof typeof row]
@@ -80,7 +78,7 @@ export default function DataTable<T extends Object & BaseEntity>({
                                                         column as keyof typeof row
                                                     ].mapper?.(
                                                         row[
-                                                            column as keyof typeof row
+                                                        column as keyof typeof row
                                                         ],
                                                     ) ||
                                                     (row[
