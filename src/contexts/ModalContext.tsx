@@ -7,6 +7,7 @@ import CreateProductFormModal from "@/components/CreateProductForm/CreateProduct
 import CreateStaffFormModal from "@/components/CreateStaffForm/CreateStaffFormModal";
 import CreateSupplierFormModal from "@/components/CreateSupplierForm/CreateSupplierFormModal";
 import UpdateCategoryFormModal from "@/components/UpdateCategoryForm/UpdateCategoryFormModal";
+import UpdateSupplierFormModal from "@/components/UpdateSupplierForm/UpdateSupplierFormModal";
 import UpdateProductFormModal from "@/components/UpdateProductForm/UpdateProductFormModal";
 import UpdateStaffFormModal from "@/components/UpdateStaffForm/UpdateStaffFormModal";
 import { ReactNodeChildren } from "@/types/ReactNodeChildren";
@@ -36,6 +37,7 @@ export function ModalProvider({ children }: ReactNodeChildren) {
             <UpdateProductFormModal />
             <UpdateCategoryFormModal />
             <UpdateStaffFormModal />
+            <UpdateSupplierFormModal />
 
             <ClaimModal />
         </ModalStateContext.Provider>
@@ -46,14 +48,16 @@ export const defaultModalStateValue = {
     addProduct: { isOpen: false },
     addCategory: { isOpen: false },
     addStaff: { isOpen: false },
-    addSupplier: { isOpen: false },
     addCustomer: { isOpen: false },
+    addSupplier: { isOpen: false },
+
 
     updateProduct: { isOpen: false },
     updateCategory: { isOpen: false },
     updateStaff: { isOpen: false },
-    updateSupplier: { isOpen: false },
     updateCustomer: { isOpen: false },
+    updateSupplier: { isOpen: false },
+
     claim: { isOpen: false },
 };
 
