@@ -5,6 +5,7 @@ import { EntityType } from "@/types/entity/PermissionResponse";
 import FONT from "@/utils/fontFamily";
 import { CustomFlowbiteTheme, Table } from "flowbite-react";
 import TableSketon from "../TableSkeleton/TableSkeleton";
+import { Row } from "./Row";
 
 export default function DataTable<T extends Object & BaseEntity>({
     data,
@@ -52,6 +53,19 @@ export default function DataTable<T extends Object & BaseEntity>({
                         )}
                     </Table.Head>
                     <Table.Body className="divide-y">
+                        {data.map((row, index) => (
+                            <Row
+                                key={index}
+                                entityType={entityType}
+                                row={row}
+                                isEdit={isEdit}
+                                index={index}
+                                pick={pick}
+                                onClickRow={onClickRow}
+                                onEdit={onEdit}
+                                onDelete={onDelete}
+                            />
+                        ))}
                     </Table.Body>
                 </Table>
             )}
