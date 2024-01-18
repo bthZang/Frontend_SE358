@@ -2,7 +2,6 @@ import useLoading from "@/hooks/useLoading";
 import apiInstance from "../apiInstance";
 import { useMutation } from "react-query";
 import Category from "@/types/entity/Category";
-import toast from "react-hot-toast";
 
 export default async function deleteCategoryAPI(category?: Category) {
     if (!category?.id) throw new Error("Invalid category");
