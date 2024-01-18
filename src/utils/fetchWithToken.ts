@@ -4,19 +4,12 @@ export default async function fetchWithToken(
     input: RequestInfo,
     init?: RequestInit | undefined,
 ) {
-    const cookieJar = cookies();
-    const accessTokenCookie = cookieJar.get("accessToken");
-    const accessToken = accessTokenCookie ? accessTokenCookie.value : "";
-    const authorizationHeader = `Bearer ${accessToken}`;
-    const existingHeaders = init?.headers || {};
-    const mergedHeaders = {
-        ...existingHeaders,
-        Authorization: authorizationHeader,
-    };
-    const updatedInit: RequestInit = {
+    return await fetch(input, {
+        headers: {
+            Authorization: `Bearer ${
+                cookies().get("accessToken")?.value || ""
+            }`,
+        },
         ...init,
-        headers: mergedHeaders,
-    };
-    const response = await fetch(input, updatedInit);
-    return response;
+    });
 }
