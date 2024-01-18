@@ -1,15 +1,13 @@
-import {
-    HiOutlineX,
-} from "react-icons/hi";
-import Button from "../Button/Button";
 import BaseEntity from "@/types/entity/BaseEntity";
+import { Textarea } from "flowbite-react";
+import { HiOutlineX } from "react-icons/hi";
 import TextInput from "../Input/TextInput";
 
 export default function BillProductTable<T extends Object & BaseEntity>({
     data,
     fields,
     className,
-    onChange = () => { },
+    onChange = () => {},
     onRemove,
 }: PropTypes<T>) {
     function getRowItem(row: T & Object & BaseEntity, column: string) {
@@ -21,10 +19,14 @@ export default function BillProductTable<T extends Object & BaseEntity>({
             className={`flex flex-col gap-2 overflow-y-auto overflow-x-hidden ${className} `}
         >
             <div className={` flex gap-5`}>
-                <p className={` flex-none w-10 font-semibold`}>ID</p>
+                <p
+                    className={` text-secondary-950 flex-none w-10 font-semibold`}
+                >
+                    ID
+                </p>
                 {Object.entries(fields).map(([key, { title, size }]) => (
                     <div
-                        className={` font-semibold py-1`}
+                        className={` text-secondary-950 font-semibold py-1`}
                         style={{
                             width: (size || 1) * 1000,
                             flexGrow: size || 1,
@@ -38,8 +40,10 @@ export default function BillProductTable<T extends Object & BaseEntity>({
             </div>
             {Array.from(data.values()).map(
                 (row: T & Object & BaseEntity, index) => (
-                    <div key={row.id} className={` flex gap-5 items-center`}>
-                        <p className={` flex-none w-10 font-semibold`}>
+                    <div key={row.id} className={` flex gap-5 items-start`}>
+                        <p
+                            className={` text-secondary-950 flex-none w-10 font-semibold`}
+                        >
                             {index + 1}.
                         </p>
                         {Object.entries(fields).map(
@@ -62,11 +66,27 @@ export default function BillProductTable<T extends Object & BaseEntity>({
                                     key={title}
                                 >
                                     {calculateFunc || editable === false ? (
-                                        <p className=" font-medium">
+                                        <p className=" text-secondary-950 font-medium">
                                             {calculateFunc?.(row) ||
                                                 getRowItem(row, key) ||
                                                 0}
                                         </p>
+                                    ) : type === "textarea" ? (
+                                        <Textarea
+                                            className={` font-normal`}
+                                            value={getRowItem(row, key)}
+                                            rows={Math.max(
+                                                3,
+                                                getRowItem(row, key)?.split("\n")
+                                                    .length || 3,
+                                            )}
+                                            onChange={(e) =>
+                                                onChange(row.id, {
+                                                    ...row,
+                                                    [key]: e.target.value,
+                                                })
+                                            }
+                                        />
                                     ) : (
                                         <TextInput
                                             type={type}
@@ -84,7 +104,7 @@ export default function BillProductTable<T extends Object & BaseEntity>({
                             ),
                         )}
                         <div
-                            className=" w-10 h-10 flex-none grid place-items-center cursor-pointer rounded-lg hover:bg-background-hover active:bg-background-active duration-200"
+                            className=" w-10 h-10 flex-none grid place-items-center cursor-pointer rounded-lg hover:bg-red-50 active:bg-red-100 duration-200"
                             onClick={() => onRemove?.(row.id)}
                         >
                             <HiOutlineX className=" text-red-400" size={20} />
@@ -111,15 +131,15 @@ type PropTypes<T> = Omit<React.ComponentPropsWithoutRef<"div">, "onChange"> & {
 
 type FieldTypes<T> =
     | {
-        [key: string]: BillProductCalculatedColumn<T, any>;
-    }
+          [key: string]: BillProductCalculatedColumn<T, any>;
+      }
     | { [key in keyof Partial<T>]: BillProductColumn<T[key]> };
 
 export type BillProductColumn<FieldType> = {
     title: string;
     size?: number;
     className?: string;
-    type?: "text" | "number";
+    type?: "text" | "number" | "textarea";
     editable?: boolean;
     defaultValue?: FieldType;
     validateFunc?: (value: FieldType) => string;
@@ -130,7 +150,7 @@ export type BillProductCalculatedColumn<EntityType, FieldType> = {
     size?: number;
     className?: string;
     editable?: boolean;
-    type?: "text" | "number";
+    type?: "text" | "number" | "textarea";
     defaultValue?: FieldType;
     calculateFunc?: (row: EntityType) => any;
 };
