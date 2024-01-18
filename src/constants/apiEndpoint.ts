@@ -18,6 +18,9 @@ const API = {
     importBill: {
         getDetail: (id: string) => `${BASE_API}/import/${id}`,
     },
+    saleBill: {
+        getDetail: (id: string) => `${BASE_API}/sale/${id}`,
+    },
     supplier: {
         getDetail: (id: string) => `${BASE_API}/supplier/${id}`,
         getHistory: (id: string) => `${BASE_API}/supplier/history/${id}`,
