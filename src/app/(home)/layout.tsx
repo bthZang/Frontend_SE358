@@ -6,6 +6,11 @@ import { ModalProvider } from "@/contexts/ModalContext";
 import { ReactNodeChildren } from "@/types/ReactNodeChildren";
 import Staff from "@/types/entity/Staff";
 import withQuery from "@/utils/withQuery";
+import {
+    EntityType,
+    PermissionType,
+    PermissionTypeList,
+} from "@/types/entity/PermissionResponse";
 
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -42,4 +47,12 @@ export default async function Layout({ children }: ReactNodeChildren) {
             </div>
         </ModalProvider>
     );
+}
+const PageEntityType = {
+    category: { type: "CATEGORY", permissions: PermissionTypeList },
+    supplier: { type: "SUPPLIER", permissions: PermissionTypeList },
+    staff: { type: "STAFF", permissions: PermissionTypeList },
+    import: { type: "IMPORT_BILL", permissions: ["CREATE"] },
+    import_bill: { type: "IMPORT_BILL", permissions: PermissionTypeList },
+    sale: { type: "SALE_BILL", permissions: ["CREATE"] },
 }
