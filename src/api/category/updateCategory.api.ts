@@ -4,6 +4,11 @@ export default async function updateCategoryAPI(category: UpdatedCategory) {
     const response = await apiInstance.put(
         `/category/${category.id}`,
         category,
+        {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        },
     );
 
     return response.data;
