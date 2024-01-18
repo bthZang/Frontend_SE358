@@ -28,7 +28,7 @@ export default async function Page({ params: { id } }: PropTypes) {
 
         return (
             <Avatar
-                className="p-3 -mx-3 w-fit flex justify-start items-start rounded-lg cursor-pointer "
+                className="p-3 -mx-3 w-fit flex justify-start items-start rounded-lg hover:bg-background-hover cursor-pointer "
                 rounded
                 placeholderInitials={customer.name
                     .split(" ")
@@ -37,7 +37,7 @@ export default async function Page({ params: { id } }: PropTypes) {
                     .join("")}
             >
                 <div>
-                    <p className=" font-normal text-start text-secondary-600 text-sm">
+                    <p className=" font-semibold text-start text-secondary-950 text-sm">
                         {customer.name}
                     </p>
                     <p className=" font-normal text-start text-secondary-600 text-sm">
