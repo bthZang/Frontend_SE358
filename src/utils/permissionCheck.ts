@@ -1,10 +1,15 @@
+import API from "@/constants/apiEndpoint";
 import {
     Authority,
     EntityType,
     EntityTypeList,
     PermissionResponse,
-    PermissionTypeList,
+    PermissionType,
 } from "@/types/entity/PermissionResponse";
+import fetchWithToken from "./fetchWithToken";
+import { cookies } from "next/headers";
+import Staff from "@/types/entity/Staff";
+import { redirect } from "next/navigation";
 
 export const GroupedPermissionTypeList = ["update", "create", "view", "delete"];
 
@@ -15,6 +20,36 @@ export type GroupedPermission = {
     entityId?: string[];
     id?: string;
 };
+
+export async function hasPermission(
+    entityType: EntityType,
+    permissionTypes: PermissionType[],
+): Promise<boolean> {
+    const accessToken = cookies().get("accessToken")?.value || "";
+    const staffInfoResponse = await fetch(API.staff.getStaffProfile, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    const staffInfo: Staff = await staffInfoResponse.json();
+    const permissionResponse = await fetchWithToken(
+        API.permission.getStaffPermission(staffInfo.id),
+        { next: { tags: ["permissions"] } },
+    );
+
+    const { permissions, authorities } = await permissionResponse.json();
+    const isAdmin = authorities.some(
+        ({ authority }: { authority: string }) => authority === "ADMIN",
+    );
+
+    if (isAdmin) return true;
+
+    return permissions.some(
+        (permission: PermissionResponse) =>
+            permission.entityType === entityType &&
+            permissionTypes.includes(permission.permissionType),
+    );
+}
 
 export function groupPermissionByEntityType(
     permissions: PermissionResponse[],
@@ -90,4 +125,11 @@ export function groupPermissionByEntityType(
     return Array.from(Object.entries(groupedPermissions));
 }
 
-export default function permissionCheck() {}
+export default async function checkPermission(
+    entityType: EntityType,
+    permissions: PermissionType[],
+) {
+    if (!entityType || !permissions) return;
+    if (!(await hasPermission(entityType, permissions)))
+        redirect("/not-permitted");
+}
