@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiArrowRight, HiMail } from "react-icons/hi";
 
-import ControllerTextInput from "@/components/ControllerInput/ControllerTextInput";
+import ControllerTextInput from "@/components/controllerInput/ControllerTextInput";
 import SEARCH_PARAMS from "@/constants/searchParams";
 import { Yesteryear } from "next/font/google";
 

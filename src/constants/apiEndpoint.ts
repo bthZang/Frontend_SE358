@@ -25,6 +25,9 @@ const API = {
         getDetail: (id: string) => `${BASE_API}/supplier/${id}`,
         getHistory: (id: string) => `${BASE_API}/supplier/history/${id}`,
     },
+    warrantyBill: {
+        getDetail: (id: string) => `${BASE_API}/warranty/${id}`,
+    },
 };
 
 export default API;
