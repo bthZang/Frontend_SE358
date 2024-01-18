@@ -3,6 +3,7 @@
 import viewImportList from "@/api/import/viewImportList.api";
 import DataTable from "@/components/DataTable/DataTable";
 import ImportBillDateFilter from "@/components/ImportBillDateFilter/ImportBillDateFilter";
+import MobileHeader from "@/components/MobileHeader/MobileHeader";
 import SEARCH_PARAMS from "@/constants/searchParams";
 import { ReactNodeChildren } from "@/types/ReactNodeChildren";
 import Revision from "@/types/Revision";
@@ -10,12 +11,11 @@ import ImportBill, { ImportProductResponse } from "@/types/entity/ImportBill";
 import FORMATTER from "@/utils/formatter";
 import withQuery from "@/utils/withQuery";
 import _ from "lodash";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 import { useQuery } from "react-query";
 
 const Layout = ({ children }: ReactNodeChildren) => {
-    const pathname = usePathname();
     const searchParams = useSearchParams();
     const router = useRouter();
 
@@ -65,12 +65,13 @@ const Layout = ({ children }: ReactNodeChildren) => {
 
     return (
         <>
+            <MobileHeader title="Import bill" />
             <div className="w-full mb-8">
                 <ImportBillDateFilter
                     onSearch={(start, end) => onDateFilter(start, end)}
                 />
             </div>
-            <div className=" w-full h-full overflow-auto flex gap-5">
+            <div className=" w-full h-full overflow-auto flex flex-col-reverse lg:flex-row gap-5">
                 <DataTable
                     data={data || []}
                     isLoading={isLoading}
@@ -89,6 +90,7 @@ const Layout = ({ children }: ReactNodeChildren) => {
                         timestamp: {
                             title: "Created date",
                             mapper: FORMATTER.toShortDate,
+                            className: "min-w-[150px]",
                         },
                         username: { title: "Staff" },
                         importProducts: {

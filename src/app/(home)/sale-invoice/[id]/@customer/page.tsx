@@ -1,8 +1,7 @@
 import Avatar from "@/components/Avatar/Avatar";
 import API from "@/constants/apiEndpoint";
 import Revision from "@/types/Revision";
-import Customer from "@/types/entity/Customer";
-import SaleBill, {
+import {
     SaleBillResponse,
     SaleProductResponse,
 } from "@/types/entity/SaleBill";
