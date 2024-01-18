@@ -2,7 +2,6 @@ import API from "@/constants/apiEndpoint";
 import axios from "axios";
 
 import { ILoginResponse } from "./types";
-import IToken from "@/types/Token";
 import SEARCH_PARAMS from "@/constants/searchParams";
 import { getCookie, setCookie } from "cookies-next";
 
@@ -27,14 +26,6 @@ export const refreshAccessTokenFn = async () => {
                 },
             );
             const tokenRes = response.data;
-            // getCookie("accessToken")
-            // localStorage.setItem(
-            //     "token",
-            //     JSON.stringify({
-            //         accessToken: tokenRes.access_token,
-            //         refreshToken: tokenRes.refresh_token,
-            //     } as IToken),
-            // );
             setCookie("accessToken", tokenRes.access_token);
             setCookie("refreshToken", tokenRes.refresh_token);
         } catch (error) {

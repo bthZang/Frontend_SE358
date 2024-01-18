@@ -14,12 +14,20 @@ import PriceRangeFilter from "@/components/PriceRangeFilter/PriceRangeFilter";
 import ProductSearch from "@/components/ProductSearch/ProductSearch";
 import { useUpdateProductModal } from "@/components/UpdateProductForm/UpdateProductFormModal";
 import SEARCH_PARAMS from "@/constants/searchParams";
+import { usePermission } from "@/hooks/usePermission";
 import ProductPreview from "@/types/entity/ProductPreview";
 import FORMATTER from "@/utils/formatter";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useQuery } from "react-query";
+import useScreen from "@/hooks/useScreen";
+import FONT from "@/utils/fontFamily";
+
+const font = FONT.primary;
 
 export default function Page() {
+    const screen = useScreen();
+    const isMobile = !screen("md");
+
     const searchParams = useSearchParams();
 
     const category = searchParams.get(SEARCH_PARAMS.categoryName) || "";
@@ -40,23 +48,30 @@ export default function Page() {
 
     const deleteProductMutation = useDeleteProductMutation(refetch);
 
+    const isAllowedCreate = usePermission("PRODUCT", ["CREATE"]);
+
     return (
         <div className="w-full h-full flex flex-col">
-            <div className=" w-full grid grid-cols-2">
-                <ProductSearch className="" />
-                <div className=" flex justify-end gap-8">
+            <div className=" w-full grid grid-cols-[repeat(12,1fr)] grid-rows-3 sm:grid-rows-2 gap-5 place-items-stretch">
+                <ProductSearch className=" col-span-12 row-span-1 md:col-span-6 lg:col-span-6" />
+                <div className=" col-span-11 xl:col-span-4 sm:col-start-1 xl:col-start-7 row-start-2 sm:row-start-2 xl:row-start-1 row-span-2 sm:row-span-1 xl:row-span-1 flex flex-col flex-wrap sm:flex-row gap-5">
                     <CategoryFilter className="" />
-                    <PriceRangeFilter />
+                    <PriceRangeFilter className="" />
+                </div>
+                {isAllowedCreate ? (
                     <Button
                         size="sm"
                         onClick={() => openCreateProductModal(refetch)}
+                        className=" place-items-stretch col-span-1 md:col-span-3 sm:col-span-3 col-start-12 md:col-start-10 sm:col-start-10 row-start-3 sm:row-start-2 md:row-start-1 lg:col-start-11"
                     >
-                        <HiPlus className=" w-4 h-4 mr-2" />
-                        Add product
+                        <div className="flex gap-2 items-center">
+                            <HiPlus className=" w-4 h-4" />
+                            {screen("sm") ? "Add product" : null}
+                        </div>
                     </Button>
-                </div>
+                ) : null}
             </div>
-            <div className=" flex gap-5 mt-5">
+            <div className=" flex flex-wrap gap-5 mt-5">
                 <FilterBadge
                     title="Product name"
                     type="search"
@@ -77,6 +92,7 @@ export default function Page() {
                 data={data || []}
                 isLoading={isLoading}
                 className="-mr-8 pr-8 mt-4"
+                entityType={"PRODUCT"}
                 onDelete={(product) => {
                     openClaimModal(
                         <>
@@ -91,7 +107,10 @@ export default function Page() {
                     openUpdateProductModal(product.id, refetch);
                 }}
                 pick={{
-                    name: { title: "Name" },
+                    name: {
+                        title: "Name",
+                        className: " font-normal min-w-[250px]",
+                    },
                     category: { title: "Category" },
                     price: {
                         title: "Price",
