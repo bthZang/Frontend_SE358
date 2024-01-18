@@ -9,7 +9,7 @@ export default function BillProductTable<T extends Object & BaseEntity>({
     data,
     fields,
     className,
-    onChange = () => {},
+    onChange = () => { },
     onRemove,
 }: PropTypes<T>) {
     function getRowItem(row: T & Object & BaseEntity, column: string) {
@@ -111,8 +111,8 @@ type PropTypes<T> = Omit<React.ComponentPropsWithoutRef<"div">, "onChange"> & {
 
 type FieldTypes<T> =
     | {
-          [key: string]: BillProductCalculatedColumn<T, any>;
-      }
+        [key: string]: BillProductCalculatedColumn<T, any>;
+    }
     | { [key in keyof Partial<T>]: BillProductColumn<T[key]> };
 
 export type BillProductColumn<FieldType> = {

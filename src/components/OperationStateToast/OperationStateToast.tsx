@@ -12,9 +12,8 @@ export default function OperationStateToast({
 }: PropsType) {
     return (
         <div
-            className={`${t?.visible ? "animate-enter" : "animate-leave"} ${
-                isSuccess ? " border-green-400" : " border-red-500"
-            } max-w-md w-full min-w-[400px] min-w-20 bg-white shadow-lg border-2 rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+            className={`${t?.visible ? "animate-enter" : "animate-leave"} ${isSuccess ? " border-green-400" : " border-red-500"
+                } max-w-md w-full min-w-[400px] min-w-20 bg-white shadow-lg border-2 rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
         >
             <div className="flex-1 w-0 p-4">
                 <div className="flex items-start">
