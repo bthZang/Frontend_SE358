@@ -1,83 +1,29 @@
-import React, { ReactNode, useState } from "react";
-import Button from "../Button/Button";
-import { Modal } from "flowbite-react";
+"use client";
 
-import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { Spinner } from "flowbite-react";
 
-export function useNotifyModal() {
-    const [isOpenModal, setOpenModal] = useState(false);
-
-    return {
-        isOpenModal,
-        setOpenModal,
-    };
-}
-
-export default function NotifyModal({
-    openModal = false,
-    closeModal = () => { },
-    icon = (
-        <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
-    ),
-    message = (
-        <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-            Are you sure you want to delete this product?
-        </h3>
-    ),
-    agree = (
-        <Button
-            color="failure"
-            onClick={() => {
-                closeModal();
-                onResponse(true);
-            }}
-        >
-            Yes, I&apos;m sure
-        </Button>
-    ),
-    cancel = (
-        <Button
-            color="gray"
-            onClick={() => {
-                closeModal();
-                onResponse(false);
-            }}
-        >
-            No, cancel
-        </Button>
-    ),
-    onResponse = () => { },
-}: PropTypes) {
+export default function Loading({
+    size = "md",
+    className,
+}: {
+    size?: "sm" | "md" | "lg";
+} & React.ComponentProps<"div">) {
     return (
-        <>
-            <Modal
-                show={openModal}
-                size="md"
-                onClose={() => closeModal()}
-                popup
+        <div
+            className={` w-fit mx-auto flex gap-5 bg-background-normal rounded-2xl ${className}`}
+        >
+            <Spinner size={size} />
+            <p
+                className={` text-secondary-900 font-semibold ${
+                    size == "md"
+                        ? "text-base"
+                        : size == "sm"
+                        ? "text-sm"
+                        : "text-lg"
+                }`}
             >
-                <Modal.Header />
-                <Modal.Body>
-                    <div className="text-center">
-                        {icon}
-                        {message}
-                        <div className="flex justify-center gap-4">
-                            {agree}
-                            {cancel}
-                        </div>
-                    </div>
-                </Modal.Body>
-            </Modal>
-        </>
+                Loading...
+            </p>
+        </div>
     );
 }
-
-type PropTypes = {
-    openModal?: boolean;
-    closeModal?: () => any;
-    icon?: ReactNode;
-    message?: ReactNode;
-    agree?: ReactNode;
-    cancel?: ReactNode;
-    onResponse?: (v: boolean) => any;
-};

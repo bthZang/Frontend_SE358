@@ -9,7 +9,6 @@ import Button from "../Button/Button";
 import { useRouter, useSearchParams } from "next/navigation";
 import SEARCH_PARAMS from "@/constants/searchParams";
 import withQuery from "@/utils/withQuery";
-import ImportBill from "@/types/entity/ImportBill";
 
 const ImportBillSearchUI = ({
     onSearch = () => {},
@@ -59,7 +58,6 @@ type PropTypes = React.ComponentPropsWithRef<"div"> & {
     onImportBillCodeSearchChange?: (keyword: string) => any;
     onSearch?: () => any;
     isImportBillLoading?: boolean;
-    importBills?: ImportBill[];
     className?: string;
 };
 
