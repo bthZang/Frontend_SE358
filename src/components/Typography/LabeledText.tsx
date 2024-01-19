@@ -2,12 +2,12 @@ import { ReactNode } from "react";
 
 export default function LabeledText({ title, value, icon }: PropTypes) {
     return (
-        <div className=" flex flex-col gap-[2px]">
+        <div className=" flex flex-col gap-[3px]">
             <p className=" text-sm text-secondary-600 flex gap-1 items-center">
                 {title}
             </p>
             {value ? (
-                <p className=" text-base font-medium flex gap-2 items-center">
+                <p className=" text-secondary-950 text-base font-medium flex gap-2 items-center">
                     {icon}
                     {value}
                 </p>

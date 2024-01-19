@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import MenuButton from "../Sidebar/MenuButton";
+import MenuButton from "../SideBar/MenuButton";
 import useScreen from "@/hooks/useScreen";
 
 export default function MobileHeader({

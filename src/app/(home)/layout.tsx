@@ -1,5 +1,5 @@
-import SideBar from "@/components/Sidebar/Sidebar";
-import API from "@/constants/apiEndpoint";
+import SideBar from "@/components/SideBar/SideBar";
+import API from "@/constants/apiEnpoint";
 import COOKIE_NAME from "@/constants/cookies";
 import SEARCH_PARAMS from "@/constants/searchParams";
 import { ModalProvider } from "@/contexts/ModalContext";

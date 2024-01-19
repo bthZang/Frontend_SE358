@@ -1,5 +1,5 @@
 import StaffAvatar from "@/components/StaffAvatar/StaffAvatar";
-import API from "@/constants/apiEndpoint";
+import API from "@/constants/apiEnpoint";
 import Revision from "@/types/Revision";
 import SaleBill, { SaleProductResponse } from "@/types/entity/SaleBill";
 import fetchWithToken from "@/utils/fetchWithToken";

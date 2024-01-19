@@ -1,4 +1,4 @@
-import API from "@/constants/apiEndpoint";
+import API from "@/constants/apiEnpoint";
 import Revision from "@/types/Revision";
 import Supplier from "@/types/entity/Supplier";
 import fetchWithToken from "@/utils/fetchWithToken";

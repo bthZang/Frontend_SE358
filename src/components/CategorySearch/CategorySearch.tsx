@@ -5,3 +5,4 @@ export default function CategorySearch(
 ) {
     return <CategorySearchUI {...props}></CategorySearchUI>;
 }
+

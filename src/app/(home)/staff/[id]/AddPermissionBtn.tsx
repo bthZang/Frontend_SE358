@@ -61,6 +61,7 @@ export default function AddPermissionBtn({
                         control={control}
                         name="permissionType"
                         title="Permission type"
+                        placeholder=""
                         items={PermissionTypeList}
                         choseValue={getValues("permissionType")}
                         onValueChange={(d: any) => {
@@ -71,6 +72,7 @@ export default function AddPermissionBtn({
                         control={control}
                         name="entityType"
                         title="Entity type"
+                        placeholder=""
                         items={EntityTypeList}
                         choseValue={getValues("entityType")}
                         onValueChange={(d: any) => {

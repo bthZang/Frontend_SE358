@@ -1,9 +1,10 @@
+import { NewCustomer } from "@/api/customer/addNewCustomer.api";
 import { Label } from "flowbite-react";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FONT from "../../utils/fontFamily";
 import Button from "../Button/Button";
-import ControllerTextInput from "@/components/ControllerInput/ControllerTextInput";
+import ControllerTextInput from "../ControllerInput/ControllerTextInput";
 import ControllerTextarea from "../ControllerTextarea/ControllerTextarea";
 import { useUpdateCustomerModal } from "./UpdateCustomerFormModal";
 import Customer from "@/types/entity/Customer";

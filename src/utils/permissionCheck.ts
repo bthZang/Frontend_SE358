@@ -1,15 +1,20 @@
-import API from "@/constants/apiEndpoint";
+import API from "@/constants/apiEnpoint";
 import {
     Authority,
     EntityType,
     EntityTypeList,
     PermissionResponse,
     PermissionType,
+    PermissionTypeList,
 } from "@/types/entity/PermissionResponse";
 import fetchWithToken from "./fetchWithToken";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
+import COOKIE_NAME from "@/constants/cookies";
 import Staff from "@/types/entity/Staff";
 import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDeepCompareEffect } from "react-use";
+import { getCookie } from "cookies-next";
 
 export const GroupedPermissionTypeList = ["update", "create", "view", "delete"];
 
@@ -41,6 +46,8 @@ export async function hasPermission(
     const isAdmin = authorities.some(
         ({ authority }: { authority: string }) => authority === "ADMIN",
     );
+
+    // console.log({ isAdmin, permissions, permissionTypes, entityType });
 
     if (isAdmin) return true;
 

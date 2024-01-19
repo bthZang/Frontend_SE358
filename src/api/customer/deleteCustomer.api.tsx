@@ -3,6 +3,7 @@ import {
     createSuccessToast,
 } from "@/components/OperationStateToast/OperationStateToast";
 import useLoading from "@/hooks/useLoading";
+import Supplier from "@/types/entity/Supplier";
 import { useMutation } from "react-query";
 import apiInstance from "../apiInstance";
 import Customer from "@/types/entity/Customer";

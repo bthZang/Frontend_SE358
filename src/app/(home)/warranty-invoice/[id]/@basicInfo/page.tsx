@@ -1,5 +1,5 @@
 import LabeledText from "@/components/Typography/LabeledText";
-import API from "@/constants/apiEndpoint";
+import API from "@/constants/apiEnpoint";
 import Revision from "@/types/Revision";
 import WarrantyBill, {
     WarrantyProductResponse,

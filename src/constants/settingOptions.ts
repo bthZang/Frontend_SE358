@@ -15,4 +15,8 @@ export const FONT_SIZE = [
         name: "Large",
         value: 20,
     },
+    // {
+    //     name: "Extra large",
+    //     value: 20,
+    // },
 ];

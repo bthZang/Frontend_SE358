@@ -1,5 +1,6 @@
 "use client";
 
+import addNewSupplier from "@/api/supplier/addNewSupplier.api";
 import useLoading from "@/hooks/useLoading";
 import { useMutation } from "react-query";
 import {

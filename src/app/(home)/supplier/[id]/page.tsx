@@ -1,5 +1,5 @@
 import LabeledText from "@/components/Typography/LabeledText";
-import API from "@/constants/apiEndpoint";
+import API from "@/constants/apiEnpoint";
 import Supplier from "@/types/entity/Supplier";
 import fetchWithToken from "@/utils/fetchWithToken";
 import SupplierFunction from "./supplierFunction";

@@ -1,6 +1,8 @@
 "use client";
 
 import { HiOutlineSearch, HiPlus } from "react-icons/hi";
+
+import { useDeleteCustomerMutation } from "@/api/customer/deleteCustomer.api";
 import viewCustomerList from "@/api/customer/viewCustomerList.api";
 import Button from "@/components/Button/Button";
 import { useClaimModal } from "@/components/ClaimModal/ClaimModal";
@@ -15,7 +17,6 @@ import withQuery from "@/utils/withQuery";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useRef } from "react";
 import { useQuery } from "react-query";
-import { useDeleteCustomerMutation } from "@/api/customer/deleteCustomer.api";
 import { usePermission } from "@/hooks/usePermission";
 import useScreen from "@/hooks/useScreen";
 import MobileHeader from "@/components/MobileHeader/MobileHeader";

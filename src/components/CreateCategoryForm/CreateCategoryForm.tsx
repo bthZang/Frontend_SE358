@@ -54,3 +54,4 @@ export default function CreateCategoryForm() {
 
     return <CreateCategoryFormUI onSubmitData={(data) => mutate(data)} />;
 }
+

@@ -1,6 +1,6 @@
+import viewCategoryList from "@/api/category/viewCategoryList.api";
 import { useQuery } from "react-query";
 import ProductSearchUI from "./ProductSearchUI";
-import viewCategoryList from "@/api/category/viewCategoryList.api";
 
 export default function ProductSearch(
     props: Omit<React.ComponentPropsWithoutRef<"div">, "onClick">,
@@ -19,3 +19,4 @@ export default function ProductSearch(
         ></ProductSearchUI>
     );
 }
+

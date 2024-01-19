@@ -16,7 +16,7 @@ import SEARCH_PARAMS from "../../constants/searchParams";
 import withQuery from "../../utils/withQuery";
 import Button from "../Button/Button";
 import useScreen from "@/hooks/useScreen";
-import MenuButton from "../Sidebar/MenuButton";
+import MenuButton from "../SideBar/MenuButton";
 
 export default function ProductSearchUI({
     onCategoryChange = () => {},

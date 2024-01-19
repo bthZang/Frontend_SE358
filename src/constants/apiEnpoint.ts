@@ -1,5 +1,5 @@
-const BASE_API = "https://web358-server.bthzang.site";
 // const BASE_API = "http://localhost:8080";
+const BASE_API = "https://esms.hoanghy.space";
 
 const API = {
     baseUrl: BASE_API,
@@ -15,15 +15,15 @@ const API = {
         getStaffPermission: (staffId: string) =>
             `${BASE_API}/staff/${staffId}/permission`,
     },
+    supplier: {
+        getDetail: (id: string) => `${BASE_API}/supplier/${id}`,
+        getHistory: (id: string) => `${BASE_API}/supplier/history/${id}`,
+    },
     importBill: {
         getDetail: (id: string) => `${BASE_API}/import/${id}`,
     },
     saleBill: {
         getDetail: (id: string) => `${BASE_API}/sale/${id}`,
-    },
-    supplier: {
-        getDetail: (id: string) => `${BASE_API}/supplier/${id}`,
-        getHistory: (id: string) => `${BASE_API}/supplier/history/${id}`,
     },
     warrantyBill: {
         getDetail: (id: string) => `${BASE_API}/warranty/${id}`,

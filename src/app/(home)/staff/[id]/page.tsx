@@ -1,4 +1,4 @@
-import API from "@/constants/apiEndpoint";
+import API from "@/constants/apiEnpoint";
 
 import fetchWithToken from "@/utils/fetchWithToken";
 import {

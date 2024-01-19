@@ -7,9 +7,10 @@ import CreateProductFormModal from "@/components/CreateProductForm/CreateProduct
 import CreateStaffFormModal from "@/components/CreateStaffForm/CreateStaffFormModal";
 import CreateSupplierFormModal from "@/components/CreateSupplierForm/CreateSupplierFormModal";
 import UpdateCategoryFormModal from "@/components/UpdateCategoryForm/UpdateCategoryFormModal";
-import UpdateSupplierFormModal from "@/components/UpdateSupplierForm/UpdateSupplierFormModal";
+import UpdateCustomerFormModal from "@/components/UpdateCustomerForm/UpdateCustomerFormModal";
 import UpdateProductFormModal from "@/components/UpdateProductForm/UpdateProductFormModal";
 import UpdateStaffFormModal from "@/components/UpdateStaffForm/UpdateStaffFormModal";
+import UpdateSupplierFormModal from "@/components/UpdateSupplierForm/UpdateSupplierFormModal";
 import { ReactNodeChildren } from "@/types/ReactNodeChildren";
 import { ReactNode, createContext, useState } from "react";
 
@@ -38,6 +39,7 @@ export function ModalProvider({ children }: ReactNodeChildren) {
             <UpdateCategoryFormModal />
             <UpdateStaffFormModal />
             <UpdateSupplierFormModal />
+            <UpdateCustomerFormModal />
 
             <ClaimModal />
         </ModalStateContext.Provider>
@@ -48,22 +50,20 @@ export const defaultModalStateValue = {
     addProduct: { isOpen: false },
     addCategory: { isOpen: false },
     addStaff: { isOpen: false },
-    addCustomer: { isOpen: false },
     addSupplier: { isOpen: false },
-
+    addCustomer: { isOpen: false },
 
     updateProduct: { isOpen: false },
     updateCategory: { isOpen: false },
     updateStaff: { isOpen: false },
-    updateCustomer: { isOpen: false },
     updateSupplier: { isOpen: false },
-
+    updateCustomer: { isOpen: false },
     claim: { isOpen: false },
 };
 
 export const ModalStateContext = createContext<IModalStateContext>({
     modalState: defaultModalStateValue,
-    setModalState: () => { },
+    setModalState: () => {},
 });
 
 export type IModalStateContext = {

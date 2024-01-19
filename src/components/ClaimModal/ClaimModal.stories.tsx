@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import ClaimModal from "./ClaimModal";
 import {
+    ModalProvider,
     ModalStateContext,
     defaultModalStateValue,
 } from "@/contexts/ModalContext";

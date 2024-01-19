@@ -94,7 +94,7 @@ const dropdownTheme: CustomFlowbiteTheme["dropdown"] = {
         header: "block py-2 px-4 text-sm text-secondary-700",
         hidden: "invisible opacity-0",
         item: {
-            container: "bg-white",
+            container: " w-[180px]",
             base: "flex flex-row-reverse items-center justify-between py-2 px-4 text-sm text-secondary-800 cursor-pointer w-full bg-background-secondary hover:bg-secondary-100 focus:bg-secondary-100 ",
             icon: "mr-2 justify-self-end h-5 w-5",
         },

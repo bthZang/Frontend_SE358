@@ -57,11 +57,16 @@ const config: Config = {
                 line: generateColor("line", ["grey01", "grey02", "blue"]),
                 background: {
                     normal: "var(--background)",
+                    secondary: "var(--background-secondary)",
+                    sidebar: "var(--background-sidebar)",
                     hover: "var(--background-hover)",
                     active: "var(--background-active)",
                 },
                 revenue: "var(--revenue)",
                 cost: "var(--cost)",
+            },
+            animation: {
+                openSideBar: "openSideBar 0.2s linear forwards 1",
             },
         },
     },

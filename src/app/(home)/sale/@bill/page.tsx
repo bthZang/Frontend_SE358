@@ -5,6 +5,7 @@ import BillProductTable from "@/components/BillProductTable/BillProductTable";
 import Button from "@/components/Button/Button";
 import ControllerSelectInput from "@/components/ControllerInput/ControllerSelectInput";
 import SearchInput from "@/components/SearchInput/SearchInput.tsx";
+import ImportBill, { ImportProduct } from "@/types/entity/ImportBill";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiCheck } from "react-icons/hi";

@@ -1,5 +1,5 @@
 import Avatar from "@/components/Avatar/Avatar";
-import API from "@/constants/apiEndpoint";
+import API from "@/constants/apiEnpoint";
 import Revision from "@/types/Revision";
 import ImportBill, { ImportProductResponse } from "@/types/entity/ImportBill";
 import Supplier from "@/types/entity/Supplier";

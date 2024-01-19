@@ -62,3 +62,4 @@ export default function CreateCategoryFormUI({
 type PropTypes = React.ComponentPropsWithoutRef<"div"> & {
     onSubmitData: SubmitHandler<NewCategory>;
 };
+

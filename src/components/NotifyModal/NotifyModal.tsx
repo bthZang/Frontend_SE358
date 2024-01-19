@@ -15,7 +15,7 @@ export function useNotifyModal() {
 
 export default function NotifyModal({
     openModal = false,
-    closeModal = () => { },
+    closeModal = () => {},
     icon = (
         <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400 dark:text-gray-200" />
     ),
@@ -46,7 +46,7 @@ export default function NotifyModal({
             No, cancel
         </Button>
     ),
-    onResponse = () => { },
+    onResponse = () => {},
 }: PropTypes) {
     return (
         <>

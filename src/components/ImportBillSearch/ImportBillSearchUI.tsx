@@ -12,8 +12,8 @@ import withQuery from "@/utils/withQuery";
 import ImportBill from "@/types/entity/ImportBill";
 
 const ImportBillSearchUI = ({
-    onSearch = () => { },
-    onImportBillCodeSearchChange = () => { },
+    onSearch = () => {},
+    onImportBillCodeSearchChange = () => {},
     isImportBillLoading,
     className,
     ...props

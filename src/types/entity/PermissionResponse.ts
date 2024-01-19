@@ -10,7 +10,7 @@ export const PermissionTypeList: PermissionType[] = [
     "DELETE_ALL",
 ];
 
-export const EntityTypeList : EntityType[] = [
+export const EntityTypeList: EntityType[] = [
     "PRODUCT",
     "CATEGORY",
     "CUSTOMER",

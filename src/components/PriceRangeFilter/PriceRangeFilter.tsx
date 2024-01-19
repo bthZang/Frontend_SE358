@@ -1,5 +1,5 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import Filter from "../Filter/FilterUI";
+import Filter from "../Filter/Filter";
 import SEARCH_PARAMS from "@/constants/searchParams";
 import withQuery from "@/utils/withQuery";
 

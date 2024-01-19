@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import DataTable, { Column } from "./DataTable";
+import StaffTouch from "@/types/entity/StaffTouch";
 import BaseEntity from "@/types/entity/BaseEntity";
 
 const meta = {

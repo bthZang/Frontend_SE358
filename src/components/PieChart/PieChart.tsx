@@ -1,8 +1,8 @@
 "use client";
 
 import { viewWeekCategory } from "@/api/statistic/category";
-import FONT from "@/utils/fontFamily";
 import useScreen from "@/hooks/useScreen";
+import FONT from "@/utils/fontFamily";
 import {
     ArcElement,
     Chart as ChartJS,

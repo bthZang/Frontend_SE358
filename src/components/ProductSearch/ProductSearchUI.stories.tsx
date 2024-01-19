@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import ProductSearch from "./ProductSearchUI";
 import withQuery from "../../utils/withQuery";
 import SEARCH_PARAMS from "../../constants/searchParams";

@@ -19,7 +19,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import useScreen from "@/hooks/useScreen";
 import { useQuery } from "react-query";
 import { usePermission } from "@/hooks/usePermission";
-import MenuButton from "@/components/Sidebar/MenuButton";
+import MenuButton from "@/components/SideBar/MenuButton";
 
 export default function Layout({ children }: ReactNodeChildren) {
     const router = useRouter();
@@ -101,22 +101,22 @@ export default function Layout({ children }: ReactNodeChildren) {
                         ...(pathname.split("/").at(-1) != "staff"
                             ? {}
                             : {
-                                email: {
-                                    title: "Email",
-                                    className:
-                                        " font-normal text-secondary-500 min-w-[150px]",
-                                },
-                                phone: {
-                                    title: "Phone number",
-                                    className:
-                                        " font-normal text-secondary-500 min-w-[100px]",
-                                },
-                                citizenId: {
-                                    title: "Citizen ID",
-                                    className:
-                                        " font-normal text-secondary-500 min-w-[100px]",
-                                },
-                            }),
+                                  email: {
+                                      title: "Email",
+                                      className:
+                                          " font-normal text-secondary-500 min-w-[150px]",
+                                  },
+                                  phone: {
+                                      title: "Phone number",
+                                      className:
+                                          " font-normal text-secondary-500 min-w-[100px]",
+                                  },
+                                  citizenId: {
+                                      title: "Citizen ID",
+                                      className:
+                                          " font-normal text-secondary-500 min-w-[100px]",
+                                  },
+                              }),
                         lastOnline: {
                             title: "Last online",
                             className:

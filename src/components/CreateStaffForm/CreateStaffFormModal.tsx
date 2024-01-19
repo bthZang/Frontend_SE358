@@ -25,7 +25,24 @@ export default function CreateStaffFormModal() {
 
     return (
         <Modal
-            theme={{ content: { inner: " rounded-2xl" } }}
+            // theme={{
+            //     root: {
+            //         base: " sm:bg-background-secondary",
+            //     },
+            //     content: {
+            //         base: "relative h-full w-full p-0 sm:p-4 md:h-auto",
+            //         inner: "relative rounded-none sm:rounded-lg bg-background-secondary shadow dark:bg-gray-700 flex flex-col max-h-[90vh]",
+            //     },
+            // }}
+            theme={{
+                root: {
+                    base: " sm:bg-background-secondary",
+                },
+                content: {
+                    base: "relative h-full w-full p-0 sm:p-4 md:h-auto",
+                    inner: "relative rounded-none sm:rounded-lg bg-background-secondary shadow dark:bg-gray-700 flex flex-col max-h-[90vh]",
+                },
+            }}
             size="3xl"
             show={isCreateStaffModalOpen}
             onClose={closeCreateStaffModal}

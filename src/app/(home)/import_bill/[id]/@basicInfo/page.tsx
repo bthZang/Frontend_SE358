@@ -1,6 +1,6 @@
 import TextInput from "@/components/Input/TextInput";
 import LabeledText from "@/components/Typography/LabeledText";
-import API from "@/constants/apiEndpoint";
+import API from "@/constants/apiEnpoint";
 import Revision from "@/types/Revision";
 import ImportBill, { ImportProductResponse } from "@/types/entity/ImportBill";
 import fetchWithToken from "@/utils/fetchWithToken";

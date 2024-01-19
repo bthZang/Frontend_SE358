@@ -2,7 +2,7 @@
 
 import viewSupplierList from "@/api/supplier/viewSupplierList.api";
 import SearchInput from "@/components/SearchInput/SearchInput.tsx";
-import MenuButton from "@/components/Sidebar/MenuButton";
+import MenuButton from "@/components/SideBar/MenuButton";
 import LabeledText from "@/components/Typography/LabeledText";
 import { SupplierContext } from "@/contexts/SupplierContext";
 import useScreen from "@/hooks/useScreen";

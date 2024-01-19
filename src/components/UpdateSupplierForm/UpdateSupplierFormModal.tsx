@@ -25,6 +25,7 @@ export default function UpdateSupplierFormModal() {
 
     return (
         <Modal
+            // theme={{ content: { inner: " rounded-2xl" } }}
             theme={{
                 root: {
                     base: " sm:bg-background-secondary",

@@ -13,3 +13,4 @@ export default async function addNewCategory(category: NewCategory) {
 export type NewCategory = {
     name: string;
 };
+

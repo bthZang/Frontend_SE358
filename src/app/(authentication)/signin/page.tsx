@@ -3,7 +3,7 @@ import SignIn from "./SignIn";
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import API from "@/constants/apiEndpoint";
+import API from "@/constants/apiEnpoint";
 
 export default async function Page() {
     const myHeaders = new Headers();

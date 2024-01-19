@@ -67,3 +67,4 @@ type PropTypes = React.ComponentPropsWithoutRef<"div"> & {
     category?: Category;
     isLoading: boolean;
 };
+
