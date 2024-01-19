@@ -6,6 +6,7 @@ import {
     TextInput as TextInputFlowbite,
 } from "flowbite-react";
 import { HiOutlineCheck, HiOutlineSearch } from "react-icons/hi";
+import { BiSolidCategory } from "react-icons/bi";
 
 import Category from "@/types/entity/Category";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -14,12 +15,14 @@ import { useDeepCompareEffect } from "react-use";
 import SEARCH_PARAMS from "../../constants/searchParams";
 import withQuery from "../../utils/withQuery";
 import Button from "../Button/Button";
+import useScreen from "@/hooks/useScreen";
+import MenuButton from "../Sidebar/MenuButton";
 
 export default function ProductSearchUI({
-    onCategoryChange = () => { },
-    onProductSearchChange = () => { },
-    onCategoryDropdownClicked = () => { },
-    onSearch = () => { },
+    onCategoryChange = () => {},
+    onProductSearchChange = () => {},
+    onCategoryDropdownClicked = () => {},
+    onSearch = () => {},
     isCategoryLoading = false,
     isProductLoading = false,
     categories = [],
@@ -36,61 +39,76 @@ export default function ProductSearchUI({
         onCategoryChange(category);
     }, [category]);
 
+    const screen = useScreen();
+    const isMobile = !screen("md");
+
     return (
         <div {...props}>
-            <ButtonFlowbite.Group>
-                <Dropdown
-                    theme={dropdownTheme}
-                    label={category?.name || "All categories"}
-                    dismissOnClick={true}
-                    onClick={onCategoryDropdownClicked}
-                    size="sm"
-                >
-                    {isCategoryLoading ? (
-                        <div className=" my-2 flex gap-2 justify-center items-center">
-                            <Spinner size="sm" />
-                            <p className=" text-sm text-secondary-900">
-                                Loading...
-                            </p>
-                        </div>
-                    ) : (
-                        <>
-                            {categories.map((category_) => (
+            <ButtonFlowbite.Group className=" w-full">
+                {isMobile ? (
+                    <MenuButton className=" bg-secondary-50 px-3 rounded-l-lg rounded-r-none" />
+                ) : (
+                    <Dropdown
+                        theme={dropdownTheme}
+                        label={
+                            screen("sm") ? (
+                                <p className=" text-primary-700">
+                                    {category?.name || "All categories"}
+                                </p>
+                            ) : (
+                                <BiSolidCategory className=" text-primary-700" />
+                            )
+                        }
+                        dismissOnClick={true}
+                        onClick={onCategoryDropdownClicked}
+                        size="sm"
+                    >
+                        {isCategoryLoading ? (
+                            <div className=" my-2 flex gap-2 justify-center items-center">
+                                <Spinner size="sm" />
+                                <p className=" text-sm text-secondary-900">
+                                    Loading...
+                                </p>
+                            </div>
+                        ) : (
+                            <>
+                                {categories.map((category_) => (
+                                    <Dropdown.Item
+                                        theme={dropdownTheme?.floating?.item}
+                                        onClick={() => setCategory(category_)}
+                                        key={category_.id}
+                                        icon={
+                                            category?.name === category_.name
+                                                ? HiOutlineCheck
+                                                : null
+                                        }
+                                    >
+                                        <p className=" w-full text-start">
+                                            {category_.name}
+                                        </p>
+                                    </Dropdown.Item>
+                                ))}
                                 <Dropdown.Item
                                     theme={dropdownTheme?.floating?.item}
-                                    onClick={() => setCategory(category_)}
-                                    key={category_.id}
-                                    icon={
-                                        category?.name === category_.name
-                                            ? HiOutlineCheck
-                                            : null
-                                    }
+                                    onClick={() => setCategory(undefined)}
+                                    icon={category ? null : HiOutlineCheck}
                                 >
-                                    <p className=" w-full text-start">
-                                        {category_.name}
+                                    <p className="  w-full text-start font-medium text-primary-300">
+                                        All categories
                                     </p>
                                 </Dropdown.Item>
-                            ))}
-                            <Dropdown.Item
-                                theme={dropdownTheme?.floating?.item}
-                                onClick={() => setCategory(undefined)}
-                                icon={category ? null : HiOutlineCheck}
-                            >
-                                <p className="  w-full text-start font-medium text-primary-300">
-                                    All categories
-                                </p>
-                            </Dropdown.Item>
-                        </>
-                    )}
-                </Dropdown>
+                            </>
+                        )}
+                    </Dropdown>
+                )}
                 <TextInputFlowbite
                     ref={productNameRef}
                     theme={textInputTheme}
+                    sizing={screen("sm") ? "md" : "sm"}
                     defaultValue={
                         searchParams.get(SEARCH_PARAMS.productName) || ""
                     }
                     placeholder="Enter product name here..."
-                    sizing="md"
                 />
                 <Button
                     size="sm"
@@ -114,8 +132,8 @@ export default function ProductSearchUI({
 }
 
 const dropdownTheme: CustomFlowbiteTheme["dropdown"] = {
-    arrowIcon: "ml-2 h-4 w-4 text-secondary-950",
-    content: "py-1 text-secondary-900 focus:outline-none",
+    arrowIcon: "ml-2 h-4 w-4 text-primary-700",
+    content: "py-1 text-secondary-600 focus:outline-none",
     floating: {
         animation: "transition-opacity",
         arrow: {
@@ -146,10 +164,18 @@ const dropdownTheme: CustomFlowbiteTheme["dropdown"] = {
 };
 
 const textInputTheme: CustomFlowbiteTheme["textInput"] = {
+    base: "flex-1",
     field: {
         input: {
+            base: " bg-secondary-50",
             withAddon: {
-                off: "rounded-none w-[240px]",
+                off: "rounded-none w-full",
+            },
+            colors: {
+                gray: "bg-secondary-50 border-secondary-900 text-secondary-900 focus:border-primary-500 focus:ring-primary-500 placeholder-secondary-500 ",
+            },
+            sizes: {
+                sm: "p-2 text-secondary-900 text-xs",
             },
         },
     },

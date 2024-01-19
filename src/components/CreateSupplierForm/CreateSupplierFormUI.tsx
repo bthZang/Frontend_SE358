@@ -1,16 +1,12 @@
+import { NewSupplier } from "@/api/supplier/addNewSupplier.api";
+import { Label } from "flowbite-react";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { NewProduct } from "../../api/product/addNewProduct.api";
-import Category from "../../types/entity/Category";
 import FONT from "../../utils/fontFamily";
 import Button from "../Button/Button";
-import ControllerSelectInput from "../ControllerInput/ControllerSelectInput";
 import ControllerTextInput from "../ControllerInput/ControllerTextInput";
-import DropZone from "../DropZone/DropZone";
-import { useCreateSupplierModal } from "./CreateSupplierFormModal";
-import { NewSupplier } from "@/api/supplier/addNewSupplier.api";
-import { Label, Textarea } from "flowbite-react";
 import ControllerTextarea from "../ControllerTextarea/ControllerTextarea";
+import { useCreateSupplierModal } from "./CreateSupplierFormModal";
 
 export default function CreateSupplierFormUI({
     onSubmitData,
@@ -40,7 +36,7 @@ export default function CreateSupplierFormUI({
                 Add supplier
             </h1>
             <form onSubmit={handleSubmit(onSubmitData)}>
-                <div className=" grid grid-cols-2 gap-5 mt-5">
+                <div className=" flex flex-col lg:grid lg:grid-cols-2 gap-5 mt-5">
                     <div>
                         <ControllerTextInput
                             control={control}
@@ -80,7 +76,11 @@ export default function CreateSupplierFormUI({
                         />
                         <div>
                             <div className="mb-2 block">
-                                <Label htmlFor="address" value="Address" />
+                                <Label
+                                    className=" text-secondary-900 font-semibold"
+                                    htmlFor="address"
+                                    value="Address"
+                                />
                             </div>
                             <ControllerTextarea
                                 id="address"
@@ -100,7 +100,11 @@ export default function CreateSupplierFormUI({
                     </div>
                     <div className="">
                         <div className="mb-2 block">
-                            <Label htmlFor="note" value="Note" />
+                            <Label
+                                className=" text-secondary-900 font-semibold"
+                                htmlFor="note"
+                                value="Note"
+                            />
                         </div>
                         <ControllerTextarea
                             id="note"

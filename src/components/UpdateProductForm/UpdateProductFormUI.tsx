@@ -192,7 +192,7 @@ export default function UpdateProductFormUI({
                                                 product?.photoURL
                                                     ?.split(";")
                                                     ?.filter((v: any) => v)[
-                                                index + 1
+                                                    index + 1
                                                 ] || undefined
                                             }
                                             onFileChange={(file) => {

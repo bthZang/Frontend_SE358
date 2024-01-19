@@ -1,15 +1,13 @@
+import { NewStaff } from "@/api/staff/addNewStaff";
+import { emailRegex } from "@/utils/regex";
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { NewProduct } from "../../api/product/addNewProduct.api";
-import Category from "../../types/entity/Category";
 import FONT from "../../utils/fontFamily";
 import Button from "../Button/Button";
 import ControllerSelectInput from "../ControllerInput/ControllerSelectInput";
 import ControllerTextInput from "../ControllerInput/ControllerTextInput";
 import DropZone from "../DropZone/DropZone";
-import { NewStaff } from "@/api/staff/addNewStaff";
 import { useCreateStaffModal } from "./CreateStaffFormModal";
-import { emailRegex } from "@/utils/regex";
 
 export default function CreateStaffFormUI({
     onSubmitData,
@@ -30,7 +28,7 @@ export default function CreateStaffFormUI({
 
     return (
         <div
-            className={` w-full bg-background-normal rounded-2xl p-8 ${className}`}
+            className={` w-full bg-background-secondary rounded-2xl p-8 ${className}`}
             {...props}
         >
             <h1
@@ -39,7 +37,7 @@ export default function CreateStaffFormUI({
                 Add new staff
             </h1>
             <form onSubmit={handleSubmit(onSubmitData)}>
-                <div className=" grid grid-cols-2 gap-5">
+                <div className=" flex flex-col-reverse lg:grid lg:grid-cols-2 gap-5">
                     <div>
                         <ControllerTextInput
                             control={control}
