@@ -83,7 +83,7 @@ export default function SignIn() {
                             alt="logo"
                         />
                         <h1 className=" mb-14 text-2xl sm:text-3xl text-center font-semibold text-secondary-900">
-                            Electronic Store
+                            Web358 Store
                         </h1>
                         <p
                             className={`absolute right-16 bottom-8 sm:top-5 translate-x-full text-2xl sm:text-4xl text-primary-500 ${yesteryear.className}`}
@@ -95,10 +95,13 @@ export default function SignIn() {
                             //     WebkitTextFillColor: "transparent",
                             // }}
                         >
-                            Management
+                            System
                         </p>
                     </div>
-                    <form onSubmit={handleSubmit(onSubmit)} className=" mx-auto max-w-[300px] sm:max-w-none">
+                    <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className=" mx-auto max-w-[300px] sm:max-w-none"
+                    >
                         <ControllerTextInput
                             control={control}
                             name="username"
