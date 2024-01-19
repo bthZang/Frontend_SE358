@@ -1,4 +1,4 @@
-import SideBar from "@/components/sidebar/Sidebar";
+import SideBar from "@/components/Sidebar/SideBar";
 import API from "@/constants/apiEndpoint";
 import COOKIE_NAME from "@/constants/cookies";
 import SEARCH_PARAMS from "@/constants/searchParams";

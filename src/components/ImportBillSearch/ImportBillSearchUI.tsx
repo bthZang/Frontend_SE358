@@ -11,8 +11,8 @@ import SEARCH_PARAMS from "@/constants/searchParams";
 import withQuery from "@/utils/withQuery";
 
 const ImportBillSearchUI = ({
-    onSearch = () => {},
-    onImportBillCodeSearchChange = () => {},
+    onSearch = () => { },
+    onImportBillCodeSearchChange = () => { },
     isImportBillLoading,
     className,
     ...props

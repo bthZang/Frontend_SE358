@@ -4,7 +4,7 @@ import viewStaffProfile from "@/api/staff/getProfile";
 import BusinessChart from "@/components/BusinessChart/BusinessChart";
 import CategoryPieChart from "@/components/PieChart/PieChart";
 import PreviewBusinessState from "@/components/PreviewBusinessState/PreviewBusinessState";
-import MenuButton from "@/components/sidebar/MenuButton";
+import MenuButton from "@/components/Sidebar/MenuButton";
 import useClient from "@/hooks/useClient";
 import useScreen from "@/hooks/useScreen";
 
