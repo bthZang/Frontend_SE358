@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import ControllerTextInput from "../ControllerInput/ControllerTextInput";
+import ControllerTextInput from "../controllerInput/ControllerTextInput";
 import Button from "../Button/Button";
 import { UpdatedCategory } from "@/api/category/updateCategory.api";
 import Category from "@/types/entity/Category";
