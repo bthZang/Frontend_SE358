@@ -12,8 +12,8 @@ import withQuery from "@/utils/withQuery";
 import ImportBill from "@/types/entity/ImportBill";
 
 const ImportBillSearchUI = ({
-    onSearch = () => {},
-    onImportBillCodeSearchChange = () => {},
+    onSearch = () => { },
+    onImportBillCodeSearchChange = () => { },
     isImportBillLoading,
     className,
     ...props
@@ -59,7 +59,6 @@ type PropTypes = React.ComponentPropsWithRef<"div"> & {
     onImportBillCodeSearchChange?: (keyword: string) => any;
     onSearch?: () => any;
     isImportBillLoading?: boolean;
-    importBills?: ImportBill[];
     className?: string;
 };
 

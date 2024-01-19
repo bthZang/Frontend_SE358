@@ -3,7 +3,7 @@ import { CustomFlowbiteTheme } from "flowbite-react";
 import COOKIE_NAME from "@/constants/cookies";
 import Staff from "@/types/entity/Staff";
 import { cookies } from "next/headers";
-import SideBarUI from "@/components/SideBar/SideBarUI";
+import SideBarUI from "@/components/Sidebar/SideBarUI";
 
 export default function SideBar({ staffInfo }: PropTypes) {
     const isCollapse =
