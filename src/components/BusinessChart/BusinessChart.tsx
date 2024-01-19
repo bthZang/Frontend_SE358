@@ -1,22 +1,25 @@
 "use client";
 
-import React from "react";
+import { viewWeekCost } from "@/api/statistic/cost.api";
+import { viewWeekRevenue } from "@/api/statistic/revenue.api";
+import useScreen from "@/hooks/useScreen";
+import FONT from "@/utils/fontFamily";
 import {
-    Chart as ChartJS,
     CategoryScale,
+    Chart as ChartJS,
+    Legend,
+    LineElement,
     LinearScale,
     PointElement,
-    LineElement,
     Title,
     Tooltip,
-    Legend,
+    RadialLinearScale,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { useQuery } from "react-query";
-import { viewWeekCost } from "@/api/statistic/cost.api";
-import { viewWeekRevenue } from "@/api/statistic/revenue.api";
 
 ChartJS.register(
+    RadialLinearScale,
     CategoryScale,
     LinearScale,
     PointElement,
@@ -26,28 +29,85 @@ ChartJS.register(
     Legend,
 );
 
-export const options = {
-    responsive: true,
-    interaction: {
-        intersect: false,
-    },
-    plugins: {
-        legend: {
-            position: "top" as const,
-            align: "end" as const,
-        },
-        title: {
-            display: false,
-            text: "",
-        },
-    },
-};
+const font = FONT.primary;
 
-export default function BusinessChart({}: {}) {
+export default function BusinessChart({ title }: { title: string }) {
+    const screen = useScreen();
+
     const { data: costs } = useQuery(["cost-week"], viewWeekCost);
     const { data: revenues } = useQuery(["revenue-week"], viewWeekRevenue);
 
     const now = new Date();
+
+    const options = {
+        responsive: true,
+        interaction: {
+            intersect: false,
+        },
+        plugins: {
+            legend: {
+                position: "top" as const,
+                align: "end" as const,
+                labels: {
+                    pointStyle: "circle" as const,
+                    boxWidth: 3,
+                    boxHeight: 3,
+                    usePointStyle: true,
+                    font: {
+                        size: 14,
+                        weight: "normal",
+                        family: "'Be Vietnam Pro', sans-serif",
+                    },
+                },
+            },
+            title: {
+                display: false,
+                text: "",
+            },
+        },
+        scales: {
+            x: {
+                display: screen("sm"),
+                ticks: {
+                    font: {
+                        family: "'Be Vietnam Pro', sans-serif",
+                        size: 15 as const,
+                        // weight: "bold" as const,
+                        color: "#6B7280" as const,
+                    } as const,
+                    color: "#6B7280" as const,
+                    padding: 30,
+                },
+                grid: {
+                    display: false,
+                },
+                border: {
+                    backdropPadding: 50,
+                    backdropColor: "rgba(0, 0, 0, 0)",
+                },
+            },
+            y: {
+                ticks: {
+                    font: {
+                        family: "'Be Vietnam Pro', sans-serif",
+                        size: 14 as const,
+                        // weight: "bold" as const,
+                        color: "#6B7280" as const,
+                    } as const,
+                    color: "#6B7280" as const,
+                    padding: 30,
+                },
+                display: screen("sm"),
+                gridLines: {
+                    color: "rgba(0, 0, 0, 0)",
+                },
+                border: {
+                    width: 0,
+                },
+            },
+        },
+        maintainAspectRatio: screen("sm"),
+    };
 
     const labels = Array(7)
         .fill("")
@@ -58,7 +118,7 @@ export default function BusinessChart({}: {}) {
             const monthName = date.toLocaleString("default", {
                 month: "short",
             });
-            return `${dayIndex} ${monthName}`;
+            return `${dayIndex.toString().padStart(2, "0")} ${monthName}`;
         })
         .reverse();
 
@@ -71,6 +131,7 @@ export default function BusinessChart({}: {}) {
                 borderColor: "#FFCB1B",
                 backgroundColor: "#FFF6C5",
                 tension: 0.35,
+                borderWidth: 4,
                 fill: true,
             },
             {
@@ -78,18 +139,26 @@ export default function BusinessChart({}: {}) {
                 data: revenues || labels.map(() => 0),
                 borderColor: "#3CAEF4",
                 backgroundColor: "#E1F0FD",
+                borderWidth: 4,
                 tension: 0.35,
             },
         ],
     };
 
     return (
-        <>
-            <div className=" w-full flex justify-between">
-                <p className=" font-semibold text-lg">Business state</p>
+        <div className=" flex-1 pb-5 sm:pb-0 w-full bg-background-normal rounded-xl ">
+            <div className=" w-full p-4 flex justify-between">
+                <p className={` font-semibold text-lg ${font.className}`}>
+                    Business state
+                </p>
                 <div></div>
             </div>
-            <Line options={options} data={data} />
-        </>
+            <div className=" relative h-40 sm:h-fit px-3 sm:px-0">
+                {
+                    //@ts-ignore
+                    <Line options={options} data={data} />
+                }
+            </div>
+        </div>
     );
 }

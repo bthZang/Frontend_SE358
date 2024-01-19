@@ -2,10 +2,11 @@
 
 import { ReactNodeChildren } from "@/types/ReactNodeChildren";
 import {
+    ButtonProps,
     ButtonSizes,
     CustomFlowbiteTheme,
-    Button as _Button,
     Spinner,
+    Button as _Button,
 } from "flowbite-react";
 
 import React from "react";
@@ -15,6 +16,7 @@ export default function Button({
     size = "md",
     btnType = "primary",
     children = "Untitle",
+    hiddenTitle,
     className,
     ref,
     isLoading = false,
@@ -24,12 +26,23 @@ export default function Button({
         <_Button
             theme={getTheme(fill)}
             color={btnType}
-            className={`${className} transition-all duration-300`}
+            className={`${className} group transition-all duration-300`}
             size={size}
             disabled={isLoading}
             {...props}
         >
-            {isLoading ? <Spinner size={size} /> : children}
+            {isLoading ? (
+                <Spinner size={size} />
+            ) : (
+                <div className=" flex items-center">
+                    {children}
+                    {hiddenTitle && (
+                        <p className=" font-semibola overflow-hidden w-fit max-w-0 group-hover:max-w-[70px] group-hover:ml-2 transition-all duration-300">
+                            {hiddenTitle}
+                        </p>
+                    )}
+                </div>
+            )}
         </_Button>
     );
 }
@@ -37,16 +50,18 @@ export default function Button({
 const getTheme = (isFill: boolean): CustomFlowbiteTheme["button"] => {
     if (isFill)
         return {
+            base: " flex flex-row items-stretch items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none",
             color: {
                 primary:
                     "bg-primary-300 hover:bg-primary-400 focus:ring-primary-100 text-white",
                 secondary:
-                    "bg-white hover:bg-secondary-50 focus:ring-secondary-100 text-secondary-900",
+                    "bg-background-normal hover:bg-secondary-50 focus:ring-secondary-100 text-secondary-900",
                 error: "bg-color-error hover:bg-red-600 focus:ring-red-100 text-white",
             },
         };
     return {
         color: {
+            base: " flex flex-row items-stretch items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none",
             primary:
                 "bg-transparent hover:bg-primary-50 focus:ring-primary-100 text-primary-600",
             secondary:
@@ -57,10 +72,11 @@ const getTheme = (isFill: boolean): CustomFlowbiteTheme["button"] => {
 };
 
 type PropTypes = ReactNodeChildren &
-    React.ComponentProps<typeof _Button> &
+    ButtonProps &
     React.ComponentPropsWithRef<"button"> & {
         fill?: boolean;
         size?: keyof ButtonSizes;
         btnType?: "primary" | "secondary" | "error";
         isLoading?: boolean;
+        hiddenTitle?: string;
     };
