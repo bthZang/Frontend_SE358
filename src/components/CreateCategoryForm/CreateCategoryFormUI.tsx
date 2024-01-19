@@ -2,7 +2,7 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FONT from "../../utils/fontFamily";
 import Button from "../Button/Button";
-import ControllerTextInput from "../ControllerInput/ControllerTextInput";
+import ControllerTextInput from "../controllerInput/ControllerTextInput";
 import { useCreateCategoryModal } from "./CreateCategoryFormModal";
 import { NewCategory } from "@/api/category/addNewCategory.api";
 
