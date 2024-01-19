@@ -1,5 +1,5 @@
 // const BASE_API = "http://localhost:8080";
-const BASE_API = "https://esms.hoanghy.space";
+const BASE_API = "https://web358-server.bthzang.site";
 
 const API = {
     baseUrl: BASE_API,
