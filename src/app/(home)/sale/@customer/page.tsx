@@ -2,7 +2,7 @@
 
 import CustomerSelection from "@/components/CustomerSelection/CustomerSelection";
 import TextInput from "@/components/Input/TextInput";
-import MenuButton from "@/components/sidebar/MenuButton";
+import MenuButton from "@/components/Sidebar/MenuButton";
 import LabeledText from "@/components/Typography/LabeledText";
 import { CustomerContext } from "@/contexts/CustomerContext";
 import useScreen from "@/hooks/useScreen";
@@ -88,9 +88,9 @@ export default function Page() {
                                 setCustomer?.(
                                     customer
                                         ? {
-                                              ...customer,
-                                              address: e.target.value,
-                                          }
+                                            ...customer,
+                                            address: e.target.value,
+                                        }
                                         : { address: e.target.value },
                                 )
                             }

@@ -15,7 +15,7 @@ import Category from "../../types/entity/Category";
 import FONT from "../../utils/fontFamily";
 import Button from "../Button/Button";
 import ControllerSelectInput from "../ControllerInput/ControllerSelectInput";
-import ControllerTextInput from "../controllerInput/ControllerTextInput";
+import ControllerTextInput from "../ControllerInput/ControllerTextInput";
 import DropZone from "../DropZone/DropZone";
 import { useCreateProductModal } from "./CreateProductFormModal";
 import TextInput from "../Input/TextInput";
