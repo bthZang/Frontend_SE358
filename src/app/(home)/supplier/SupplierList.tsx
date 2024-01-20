@@ -30,7 +30,7 @@ export default function SupplierList() {
     const deleteSupplierMutation = useDeleteSupplierMutation(refetch);
     const { openClaimModal } = useClaimModal();
 
-    return (
+        return (
         <DataTable
             data={data || []}
             isLoading={isLoading}

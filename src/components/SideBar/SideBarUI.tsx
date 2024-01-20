@@ -125,7 +125,7 @@ export default function SideBarUI({
                                 <h1
                                     className={` ml-3 text-2xl text-secondary-950 font-semibold ${FONT.inter.className}`}
                                 >
-                                    ESMS
+                                    Web358
                                 </h1>
                             )}
                         </div>
